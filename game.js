@@ -34,13 +34,11 @@ let mouseX = 0,
   mouseY = 0;
 //check aspect ratio
 let ARType = 1,
-  min, minx, miny;
+  min;
 
 function getARType(AR) {
   if(AR < 0.8) { ARType = 1; } else if(AR > 1.2) { ARType = 3; } else { ARType = 2; }
   min = w > h ? h : w;
-  minx = min;
-  miny = min;
 }
 getARType(w / h);
 
