@@ -1,5 +1,5 @@
 let dev = false;
-let version = "0.0.1";
+let version = "0.0.2";
 
 const colors = ["white", "grey", "#151515", "white", "blue"];
 
@@ -36,13 +36,40 @@ let mouseX = 0,
 let ARType = 1,
   min;
 
+let standardUnit = 1;
+
+/**
+ * getStandard - gets a standard unit width (for dynamic aspect ratios and screen sizes)
+ *
+ * @param  {type} min minimum width
+ * @param  {type} max maximum width
+ * @return {type}     width in pixels
+ */
+function getStandard(min, max) {
+  return Math.max(Math.min((1 / w * h) * 256, min), max);
+}
+
 function getARType(AR) {
+  standardUnit = getStandard(w / 2.5, w / 7);
+
   if(AR < 0.8) { ARType = 1; } else if(AR > 1.2) { ARType = 3; } else { ARType = 2; }
   min = w > h ? h : w;
 }
 getARType(w / h);
 
 //asset stuff
+
+/**
+ * button - draws a rectangular button with an image & hover-image
+ *
+ * @param  {type} x        x
+ * @param  {type} y        y
+ * @param  {type} w        width
+ * @param  {type} h        height
+ * @param  {type} callback runs when clicked
+ * @param  {type} img      main image
+ * @param  {type} imgb     hover-image
+ */
 function button(x, y, w, h, callback, img, imgb) {
   if(img) {
     if(mouseX > x &&
@@ -78,35 +105,24 @@ function button(x, y, w, h, callback, img, imgb) {
   }
 }
 
-function imageInSquare(img, x, y, W, H, tx, ty) {
-  switch (ARType) {
-    case (1):
-      ctx.drawImage(img, x * min, ty + y * min, W * min, H * min);
-      break;
-    case (2):
-      if(w > h * 0.85) {
-        ctx.drawImage(img, 0.5 * (w - h * 0.85) + x * (h * 0.85), 0.15 * h + y * (h * 0.85), W * h * 0.85, H * h * 0.85);
-      } else {
-        ctx.drawImage(img, x * min, 0.15 * h + y * min, W * min, H * min);
-      }
-      break;
-    case (3):
-      let mn = 0,
-        px = 0,
-        py = 0;
-      if(min > 0.6 * w) {
-        mn = 0.6 * w;
-        px = (w - 0.6 * w) / 2;
-        py = (h - 0.6 * w);
-        if((h - (0.6 * w)) * 3.2 < w * 0.2) {
-          py /= 2;
-        }
-      } else {
-        mn = min;
-        px = (w - min) / 2;
-      }
-      ctx.drawImage(img, px + mn * x, py + mn * y, mn * W, mn * H);
-      break;
+
+/**
+ * callWithinAR - Calls the callback function with parameters for a rect of the specified aspect ratio within the rect provided
+ *
+ * @param  {number} x        x
+ * @param  {number} y        y
+ * @param  {number} width    width
+ * @param  {number} height   height
+ * @param  {number} ar       aspect ratio
+ * @param  {function} callback callback
+ */
+function callWithinAR(x, y, width, height, ar, callback) {
+  if(height * ar < width) {
+    //wide
+    callback(x + width / 2 - height / 2 * ar >> 0, y >> 0, height * ar >> 0, height >> 0);
+  } else {
+    //tall
+    callback(x >> 0, y + height / 2 - width / 2 / ar >> 0, width >> 0, width / ar >> 0);
   }
 }
 
@@ -208,6 +224,12 @@ window.ontouchmove = (event) => {
     mouseX = event.touches[0].clientX;
     mouseY = event.touches[0].clientY;
   }
-};
+}
 
 document.addEventListener('contextmenu', event => event.preventDefault());
+
+// special dev settings
+if(dev) {
+  sb = 3;
+  toggleMusic();
+}
