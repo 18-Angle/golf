@@ -5,7 +5,7 @@ let onCourse = 1;
 
 let courseAssets = [play, play, play, play, play];
 
-let playingCourse = 0;
+let playingCourse = 1;
 
 function setupCourse(L) {
   sb = 2;
@@ -33,10 +33,10 @@ function wideCourseButtons(x, y, w, h) {
 }
 
 function tallCourseButtons(x, y, w, h) {
-  courseButton(x,y+ 0 * h, w, 1);
-  courseButton(x,y+ 0.25 * h, w, 2);
-  courseButton(x,y+ 0.5 * h, w, 3);
-  courseButton(x,y+ 0.75 * h, w, 4);
+  courseButton(x, y + 0 * h, w, 1);
+  courseButton(x, y + 0.25 * h, w, 2);
+  courseButton(x, y + 0.5 * h, w, 3);
+  courseButton(x, y + 0.75 * h, w, 4);
 }
 
 function s1(tx, ty) {
@@ -47,7 +47,7 @@ function s1(tx, ty) {
   switch (ARType) {
     case (1):
     case (2):
-      callWithinAR(0, s * 0.4, w, h - s * 0.4, courseButtonAR/4, tallCourseButtons);
+      callWithinAR(0, s * 0.4, w, h - s * 0.4, courseButtonAR / 4, tallCourseButtons);
       break;
     case (3):
       if(courseButtonAR * (h - 0.4 * s) < w - s * 2) {

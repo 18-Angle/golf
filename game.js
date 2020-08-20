@@ -1,5 +1,5 @@
-let dev = false;
-let version = "0.0.2";
+let dev = true;
+let version = "0.0.3";
 
 const colors = ["white", "grey", "#151515", "white", "blue"];
 
@@ -232,4 +232,5 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 if(dev) {
   sb = 3;
   toggleMusic();
+  setupHole(playingHole);
 }

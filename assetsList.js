@@ -1,3 +1,22 @@
+const golfBall = new Image();
+golfBall.src = 'assets/golfBall.png';
+
+
+const flag = new Image();
+flag.src = 'assets/flag.png';
+
+const fairway = new Image();
+fairway.src = 'assets/fairway.png';
+
+const green = new Image();
+green.src = 'assets/green.png';
+
+const trees = new Image();
+trees.src = 'assets/trees.png';
+
+const water = new Image();
+water.src = 'assets/water.png';
+
 const music = new Image();
 music.src = 'assets/music.png';
 
