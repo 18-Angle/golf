@@ -5,11 +5,16 @@ var menuMusic = new Howl({
   autoplay: true
 });
 
+var forestTheme2 = new Howl({
+  src: ['assets/forest-theme.mp3'],
+  loop: true
+});
+
 var D=14263.47;
 var DD=71152.4;
 var CD=2000;
 var forestTheme = new Howl({
-  src: ['assets/forest-theme-2.mp3'],
+  src: ['assets/forest-theme.mp3'],
   sprite: {
     start:[0,D],
     loop:[D,DD-D,true]

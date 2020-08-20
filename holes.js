@@ -20,6 +20,42 @@ Key:
 let holes = [
   [],
   [{
+    tee: { x: 2, y: 3 },
+    hole: { x: 10, y: 3 },
+    fairway: [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0],
+      [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+      [0, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 0],
+      [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0],
+      [0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ],
+    machines: [{
+        type: "piston",
+        variety: "square",
+        rotation: 0,
+        x: 4,
+        y: 5
+      },
+      {
+        type: "piston",
+        variety: "left-angle",
+        rotation: 0.5,
+        x: 8,
+        y: 1
+      },
+      {
+        type: "trap-door",
+        variety: "square",
+        rotation: 0,
+        x: 4,
+        y: 5
+      }
+    ],
+    par: 3,
+    best: 0
+  }, {
     tee: { x: 1, y: 2 },
     hole: { x: 7, y: 2 },
     fairway: [

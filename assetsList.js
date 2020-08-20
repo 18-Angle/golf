@@ -1,6 +1,17 @@
 const golfBall = new Image();
 golfBall.src = 'assets/golfBall.png';
 
+const piston = new Image();
+piston.src = 'assets/piston.png';
+
+const pistonBlock = new Image();
+pistonBlock.src = 'assets/piston-block.png';
+
+const pistonTriangle = new Image();
+pistonTriangle.src = 'assets/piston-triangle.png';
+
+const pistonBlockBlock = new Image();
+pistonBlockBlock.src = 'assets/piston-block-block.png';
 
 const flag = new Image();
 flag.src = 'assets/flag.png';
