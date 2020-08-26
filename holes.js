@@ -2,27 +2,52 @@
 let holes = [
   [],
   [{
-    tee: { x: 1, y: 2 },
-    hole: { x: 6, y: 2 },
+    tee: { x: 4, y: 3 },
+    hole: { x: 9, y: 3 },
     fairway:
     [
-      [0,0,0,0,0,0,0,0,0],
-      [0,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,1,0],
-      [0,1,1,1,1,1,1,1,0],
-      [0,0,0,0,0,0,0,0,0]
+      [1,1,1,1,1,1,1,1,1,1,1],
+      [1,0,1,0,1,1,1,1,1,1,1],
+      [0,0,0,1,0,0,1,2,1,1,1],
+      [1,0,1,1,1,1,1,2,1,1,1],
+      [1,0,1,2,2,1,2,2,2,1,1],
+      [1,1,1,1,1,2,1,2,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1],
     ],
     machines: [
+      {
+        type: "gate",
+        rotation: 0,
+        x: 5,
+        y: 3
+      },
+      {
+        type: "trapDoor",
+        x: 8,
+        y: 3
+      },
+      {
+        type: "gate",
+        rotation: 0.5,
+        active:true,
+        x: 6,
+        y: 2
+      },
+      {
+        type: "piston",
+        variety: "left-angle",
+        rotation: 0.25,
+        x: 2,
+        y: 3
+      },
       {
         type: "piston",
         variety: "square",
         rotation: 0,
-        x: 4,
-        y: 3
+        x: 3,
+        y: 6
       },
-    ],
-    par: 3,
-    best: 0
+    ]
   },
   {
     tee: { x: 1, y: 2 },
@@ -39,9 +64,9 @@ let holes = [
       {
         type: "piston",
         variety: "square",
-        rotation: 0,
+        rotation: -0.125,
         x: 4,
-        y: 3
+        y: 2.75
       },
     ],
     par: 3,
