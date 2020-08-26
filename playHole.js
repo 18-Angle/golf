@@ -247,10 +247,7 @@ function machine(m) {
   }
 }
 
-let countDown = 0;
-
 function setupHole(L, changeScene = true) {
-  countDown = 120;
   if(changeScene) {
     sb = 3;
     playingHole = L;
@@ -277,8 +274,6 @@ function setupHole(L, changeScene = true) {
 
 let contactLag = 0;
 
-let hitCountdown = 0;
-
 function runHole() {
   let W = hole.fairway[0].length,
     H = hole.fairway.length;
@@ -296,7 +291,7 @@ function runHole() {
           }
           break;
         default:
-          if(countDown < 0 && ball.c_position.c.x >> 0 === x && ball.c_position.c.y >> 0 === y) {
+          if(ball.c_position.c.x >> 0 === x && ball.c_position.c.y >> 0 === y) {
             sb = 2;
             switchSong(menuMusic);
           }
@@ -305,10 +300,6 @@ function runHole() {
     }
   }
   world.step(1 / 60);
-  if(countDown-- > 0) { return; }
-  if(ball.c_velocity.v.length() <= 0.1 && hitCountdown-- <= 0) {
-    hitBall();
-  }
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
@@ -582,7 +573,7 @@ function drawHole(x, y, w, h) {
   ctx.drawImage(flag,
     x + w / W * hole.hole.x >> 0,
     y + h / H * (hole.hole.y - 1) >> 0,
-    (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * hole.hole.x >> 0),
+    (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * (hole.hole.x - 1) >> 0),
     (y + h / H * (hole.hole.y + 1) >> 0) - (y + h / H * (hole.hole.y - 1) >> 0));
 
   for(let m of allMachines) {
@@ -607,18 +598,6 @@ function drawHole(x, y, w, h) {
 function callHole(x, y, width, height) {
   runHole();
   drawHole(x, y, width, height);
-}
-
-function hitBall() {
-  hitCountdown = 30;
-  hitSound.play();
-  let v = Math.random() * Math.PI * 2;
-
-  let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
-  let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
-  v = Math.atan2(dy, dx);
-  let vv = Math.sqrt(dx * dx + dy * dy) * 2 + 2;
-  ball.applyForceToCenter(vec2(Math.cos(v) * vv, Math.sin(v) * vv), 1)
 }
 
 function activateStuff() {
