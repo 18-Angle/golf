@@ -142,7 +142,7 @@ const trapDoor = new Image();
 trapDoor.src = 'assets/trapdoorClosed.png';
 
 const trapDoorOpen = new Image();
-trapDoorOpen.src = 'assets/trapDooropen.png';
+trapDoorOpen.src = 'assets/trapDoorOpen.png';
 
 const gate = new Image();
 gate.src = 'assets/gate.png';
