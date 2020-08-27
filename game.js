@@ -225,6 +225,23 @@ window.ontouchmove = (event) => {
   }
 }
 
+let keys = {};
+
+document.onkeydown = (event) => {
+  if(keys[event.code]){return;}
+  keys[event.code] = true;
+  if(scene != 3){return;}
+  if(event.code === 'KeyR'){
+    setupHole(playingHole, false);
+    return;
+  }
+  activateStuff();
+}
+
+document.onkeyup = (event) => {
+  keys[event.code] = false;
+}
+
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 // special dev settings

@@ -33,27 +33,27 @@ function drawPiston(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
 
-  drawStaticObject(x + 3, y + 3, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
-  drawStaticObject(x + 6, y + 6, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
-  drawStaticObject(x + 9, y + 9, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x, y, obj.x + 0.52, obj.y + 0.52, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x,y, obj.x + 0.54, obj.y + 0.54, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x ,y, obj.x + 0.56, obj.y + 0.56, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
   //*
   switch (obj.variety) {
     case 'left-angle':
-      drawObject(x + 3, y + 3, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
-      drawObject(x + 6, y + 6, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
-      drawObject(x + 9, y + 9, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
       drawObject(x, y, w / W, obj.body, triPiston, 1, 0, 0, 0.45 - 1, 2, true);
       break;
     case 'right-angle':
-      drawObject(x + 3, y + 3, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
-      drawObject(x + 6, y + 6, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
-      drawObject(x + 9, y + 9, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
       drawObject(x, y, w / W, obj.body, triPiston, 1, 0, 0, 0.45 - 1, 2);
       break;
     default:
-      drawObject(x + 3, y + 3, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
-      drawObject(x + 6, y + 6, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
-      drawObject(x + 9, y + 9, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
       drawObject(x, y, w / W, obj.body, piston, 1, 0, 0, 0.45);
   } /**/
   drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlock, 1, obj.rotation, 0, 0);
@@ -69,13 +69,13 @@ function activatePiston(piston) {
 
 function drawGate(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
-  drawObject(x + 3, y + 3, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
-  drawObject(x + 6, y + 6, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
-  drawObject(x + 9, y + 9, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
 
-  drawObject(x + 3, y + 3, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
-  drawObject(x + 6, y + 6, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
-  drawObject(x + 9, y + 9, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
   drawObject(x, y, w / W, obj.gate1, gate, 1, 0.5, 0, -0.25);
   drawObject(x, y, w / W, obj.gate2, gate, 1, 0, 0, -0.25);
 }
@@ -95,8 +95,7 @@ function drawTrapDoor(door, x, y, w, h) {
   if(door.active) {
     door.active = door.active ? door.active - 1 : 0;
     if(door.active && ball.c_position.c.x >> 0 === door.x && ball.c_position.c.y >> 0 === door.y) {
-      sb = 2;
-      switchSong(menuMusic);
+      setupHole(playingHole, false);
     }
   }
   drawTile({ img: door.active ? trapDoorOpen : trapDoor }, x, y, w, h, door.x, door.y);
@@ -292,8 +291,7 @@ function runHole() {
           break;
         default:
           if(ball.c_position.c.x >> 0 === x && ball.c_position.c.y >> 0 === y) {
-            sb = 2;
-            switchSong(menuMusic);
+            setupHole(playingHole, false);
           }
           break;
       }
@@ -305,7 +303,8 @@ function runHole() {
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
   let dist = Math.sqrt(dx * dx + dy * dy);
   if(dist < 0.1) {
-    setupHole(playingHole, false);
+      sb = 2;
+      switchSong(menuMusic);
   }
   if(contactLag-- < 0 && ball.m_contactList && ball.m_contactList.contact.v_points.length > 0) {
     contactLag = 20;
@@ -590,7 +589,7 @@ function drawHole(x, y, w, h) {
     }
   }
   //drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
-  drawObject(x, y, w/W, ball, jeff, 0.3);
+  drawObject(x, y, w/W, ball, jeff, 0.25,0,0.01);
   if(dev) {
     debugBodies(x, y, w / W);
   }
@@ -615,6 +614,9 @@ function s3(tx, ty) {
   button(0, 0, s, 0.4 * s, () => {
     sb = 2;
     switchSong(menuMusic);
+  }, back, backb);
+  button(w-s, 0, s, 0.4 * s, () => {
+    setupHole(playingHole, false);
   }, back, backb);
   button(w / 2 - s / 2, h - 0.4 * s, s, 0.4 * s, activateStuff, play, playb);
 

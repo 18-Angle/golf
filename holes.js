@@ -2,6 +2,35 @@ let holes = [
   [],
   [
     {
+      tee: { x: 0.5, y: 2 },
+      hole: { x: 8, y: 2 },
+      fairway: [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      ],
+      machines: [{
+          type: "piston",
+          variety: "square",
+          rotation: 0.25,
+          x: -0.5,
+          y: 2
+        },
+        {
+          type: "gate",
+          rotation: 0,
+          active: true,
+          x: 7,
+          y: 2
+        },
+
+      ],
+      par: 3,
+      best: 0
+    },
+    {
       tee: { x: 1, y: 1 },
       hole: { x: 2, y: 1 },
       fairway: [
