@@ -1,4 +1,4 @@
-const DebugBodiesView = false;
+const DebugBodiesView = true;
 
 let onHole = [-1, 0, 0, 0, 0];
 let playingHole = 0;
@@ -63,7 +63,7 @@ function drawPiston(obj, x, y, w, h) {
 
 function activatePiston(piston) {
   if(ball.isActive() && piston.body.c_velocity.v.length() > 0.01) { return; }
-  let pistonStrength = 290*(piston.power?piston.power:1);
+  let pistonStrength = 290 * (piston.power ? piston.power : 1);
   piston.body.applyForceToCenter(vec2(
     Math.sin(piston.body.getAngle()) * pistonStrength,
     -Math.cos(piston.body.getAngle()) * pistonStrength), true);
@@ -270,10 +270,37 @@ function setupHole(L, changeScene = true) {
   for(let m of hole.machines) {
     allMachines.push(machine(m));
   }
+
+  let W = hole.fairway[0].length,
+    H = hole.fairway.length;
+
+  for(let i = W - 1; i >= 0; i--) {
+    for(let j = H - 1; j >= 0; j--) {
+      if(getFairway(i, j) === 3) {
+        world.createBody(vec2(i+0.5,j+0.5)).createFixture(pl.Box(0.5,0.5),1);
+        //drawTile({ img: wall0 }, x, y, w / 2, h / 2, i, j);
+      }
+    }
+  }
+
   world.step(1 / 60);
 }
 
 let contactLag = 0;
+
+function nextLevel() {
+  console.log(playingHole[playingCourse]);
+  if(playingHole < holes[playingCourse].length - 1) {
+    playingHole++;
+    if(playingHole > onHole[playingCourse]) {
+      onHole[playingCourse] = playingHole;
+    }
+    setupHole(playingHole, false);
+    return;
+  }
+  sb = 2;
+  switchSong(menuMusic);
+}
 
 function runHole() {
   let W = hole.fairway[0].length,
@@ -305,8 +332,7 @@ function runHole() {
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
   let dist = Math.sqrt(dx * dx + dy * dy);
   if(dist < 0.1) {
-    sb = 2;
-    switchSong(menuMusic);
+    nextLevel();
   }
   if(contactLag-- < 0 && ball.m_contactList && ball.m_contactList.contact.v_points.length > 0) {
     contactLag = 20;
@@ -363,6 +389,30 @@ let fairwayAssets = [
   { img: grass }, { img: sand10L }, { img: grass }, { img: sand11L },
   { img: sand11L }, { img: sand6L }, { img: sand12L },
   { img: grass }, { img: grass }, { img: grass }, { img: grass },
+
+
+
+  { img: grass }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: shadowF }, { img: wall0 }, { f: 1, img: shadowB },
+  { img: wall0 }, { img: shadowT }, { img: wall0 }, { img: trees },
+
+  { img: trees }, { img: wall1 }, { img: wall0 }, { img: wall1 },
+  { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
+  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+
+
+  { img: trees }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: grass }, { img: wall0 }, { img: grass },
+  { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+
+  { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
+  { img: wall0 }, { img: grass }, { img: wall0 }, { img: grass },
+  { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
+  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+
 ];
 
 // data {img: image, r: rotation, f: flip?}
@@ -597,6 +647,15 @@ function drawHole(x, y, w, h) {
     default:
       drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
   }
+
+  for(let i = W * 2 - 1; i >= 0; i--) {
+    for(let j = H * 2 - 1; j >= 0; j--) {
+      if(getFairway(i / 2 >> 0, (j + 1) / 2 >> 0) === 3) {
+        drawTile({ img: wall0 }, x, y, w / 2, h / 2, i, j);
+      }
+    }
+  }
+
   if(dev) {
     debugBodies(x, y, w / W);
   }

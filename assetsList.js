@@ -138,6 +138,23 @@ const sandCornerShadow = new Image();
 sandCornerShadow.src = 'assets/sandCornerShadow.png';
 
 
+const wall0 = new Image();
+wall0.src = 'assets/wall0.png';
+
+const wall1 = new Image();
+wall1.src = 'assets/wall1.png';
+
+
+const shadowF = new Image();
+shadowF.src = 'assets/shadow.png';
+
+const shadowT = new Image();
+shadowT.src = 'assets/cornerShadow1.png';
+
+const shadowB = new Image();
+shadowB.src = 'assets/cornerShadow2.png';
+
+
 const jeff = new Image();
 jeff.src = 'assets/jeff.png';
 
