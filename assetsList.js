@@ -155,6 +155,13 @@ const shadowB = new Image();
 shadowB.src = 'assets/cornerShadow2.png';
 
 
+const wedge = new Image();
+wedge.src = 'assets/wedge.png';
+
+const wedgeShadow = new Image();
+wedgeShadow.src = 'assets/wedgeShadow.png';
+
+
 const jeff = new Image();
 jeff.src = 'assets/jeff.png';
 

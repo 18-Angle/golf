@@ -1,4 +1,4 @@
-const DebugBodiesView = true;
+const DebugBodiesView = false;
 
 let onHole = [-1, 0, 0, 0, 0];
 let playingHole = 0;
@@ -33,6 +33,12 @@ let holeThemes = [forestTheme, forestTheme, forestTheme, forestTheme, forestThem
 
 function drawPiston(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
+
+  let maxExtend = 1.22;
+
+  if(Math.sqrt(Math.pow(obj.body.c_position.c.x + obj.body.c_velocity.v.x / 60 - obj.x - 0.5, 2) + Math.pow(obj.body.c_position.c.y + obj.body.c_velocity.v.y / 60 - obj.y - 0.5, 2)) > maxExtend) {
+    obj.body.setLinearVelocity(vec2(-Math.sin(obj.rotation * Math.PI), Math.cos(obj.rotation * Math.PI)));
+  }
 
 
   drawStaticObject(x, y, obj.x + 0.52, obj.y + 0.52, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
@@ -69,6 +75,7 @@ function activatePiston(piston) {
     -Math.cos(piston.body.getAngle()) * pistonStrength), true);
 }
 
+
 function drawGate(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
   drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
@@ -93,6 +100,7 @@ function activateGate(gate) {
   gate.active = !gate.active;
 }
 
+
 function drawTrapDoor(door, x, y, w, h) {
   if(door.active) {
     door.active = door.active ? door.active - 1 : 0;
@@ -105,6 +113,17 @@ function drawTrapDoor(door, x, y, w, h) {
 
 function activateTrapDoor(door) {
   door.active = door.active === 0 ? 60 : door.active;
+}
+
+
+function drawWedge(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+
+  drawStaticObject(x, y, obj.x + 0.52, obj.y + 0.52, w / W, wedgeShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x, y, obj.x + 0.54, obj.y + 0.54, w / W, wedgeShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x, y, obj.x + 0.56, obj.y + 0.56, w / W, wedgeShadow, 1, obj.rotation, 0, 0);
+
+  drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, wedge, 1, obj.rotation, 0, 0);
 }
 
 function machine(m) {
@@ -239,6 +258,24 @@ function machine(m) {
       }
       return obj;
     }
+    case 'wedge': {
+      let block = world.createBody(vec2(m.x + 0.5, m.y + 0.5));
+      block.setAngle(Math.PI * 2 * m.rotation);
+      block.createFixture(pl.Polygon([
+        vec2(-0.5,-0.5),
+        vec2(-0.5,0.5),
+        vec2(0.5,0.5),
+      ]), 1);
+      let obj = {
+        body: block,
+        draw: drawWedge,
+        activate: a => {}
+      };
+      for(let v in m) {
+        obj[v] = m[v];
+      }
+      return obj;
+    }
     default:
       return {
         body: 0,
@@ -277,7 +314,7 @@ function setupHole(L, changeScene = true) {
   for(let i = W - 1; i >= 0; i--) {
     for(let j = H - 1; j >= 0; j--) {
       if(getFairway(i, j) === 3) {
-        world.createBody(vec2(i+0.5,j+0.5)).createFixture(pl.Box(0.5,0.5),1);
+        world.createBody(vec2(i + 0.5, j + 0.5)).createFixture(pl.Box(0.5, 0.5), 1);
         //drawTile({ img: wall0 }, x, y, w / 2, h / 2, i, j);
       }
     }
@@ -289,7 +326,6 @@ function setupHole(L, changeScene = true) {
 let contactLag = 0;
 
 function nextLevel() {
-  console.log(playingHole[playingCourse]);
   if(playingHole < holes[playingCourse].length - 1) {
     playingHole++;
     if(playingHole > onHole[playingCourse]) {
@@ -579,7 +615,8 @@ function drawHole(x, y, w, h) {
 
   for(let i = W * 2 - 1; i >= 0; i--) {
     for(let j = H * 2 - 1; j >= 0; j--) {
-      switch (getFairway(i / 2 >> 0, j / 2 >> 0)) {
+      let ON = getFairway(i / 2 >> 0, j / 2 >> 0);
+      switch (ON) {
         case 2:
           drawTile({ img: sand }, x, y, w / 2, h / 2, i, j);
           break;
@@ -595,7 +632,14 @@ function drawHole(x, y, w, h) {
       ];
 
       let mx = Math.max(Math.max(...bits), 1);
-      bits = bits.map(a => a === 1 ? 1 : 0);
+      if(ON === 0) {
+        bits = bits.map(a => a !== 0 ? 1 : 0);
+        bits.unshift(j % 2);
+        drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
+        continue;
+      } else if(mx > 1) {
+        bits = bits.map(a => a !== mx ? 1 : 0);
+      }
 
       bits.unshift(j % 2);
 
