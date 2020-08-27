@@ -138,6 +138,10 @@ const sandCornerShadow = new Image();
 sandCornerShadow.src = 'assets/sandCornerShadow.png';
 
 
+const jeff = new Image();
+jeff.src = 'assets/jeff.png';
+
+
 const trapDoor = new Image();
 trapDoor.src = 'assets/trapdoorClosed.png';
 

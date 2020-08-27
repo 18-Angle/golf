@@ -14,12 +14,12 @@ let holeAR = 1,
 
 let ballD = {
   bullet: true,
-  linearDamping: -4,
+  linearDamping: 0.4,
   angularDamping: 1.2
 };
 let ballFD = {
-  friction: 1,
-  density: 0.5,
+  friction: 0.2,
+  density: 0.3,
   restitution: 0.4
 };
 
@@ -282,7 +282,7 @@ function runHole() {
       switch (hole.fairway[y][x]) {
         case (1):
           if(ball.c_position.c.x >> 0 === x && ball.c_position.c.y >> 0 === y) {
-            ball.setLinearVelocity(ball.m_linearVelocity.mul(0.9));
+            //ball.setLinearVelocity(ball.m_linearVelocity.mul(0.9));
           }
           break;
         case (2):
@@ -571,7 +571,7 @@ function drawHole(x, y, w, h) {
   ctx.fillText(shown.map((a,b)=>a||!fairwayAssets[b]||fairwayAssets[b].img===grass?'':b+',').join(''),20,y+h+w/W/2);/**/
 
   ctx.drawImage(flag,
-    x + w / W * hole.hole.x >> 0,
+    x + w / W * (hole.hole.x - 0.5) >> 0,
     y + h / H * (hole.hole.y - 1) >> 0,
     (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * (hole.hole.x - 1) >> 0),
     (y + h / H * (hole.hole.y + 1) >> 0) - (y + h / H * (hole.hole.y - 1) >> 0));
@@ -589,7 +589,8 @@ function drawHole(x, y, w, h) {
       m.draw(m, x, y, w, h);
     }
   }
-  drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
+  //drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
+  drawObject(x, y, w/W, ball, jeff, 0.3);
   if(dev) {
     debugBodies(x, y, w / W);
   }

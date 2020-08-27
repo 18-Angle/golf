@@ -33,8 +33,7 @@ let w = c.width,
 let mouseX = 0,
   mouseY = 0;
 //check aspect ratio
-let ARType = 1,
-  min;
+let ARType = 1, min;
 
 let standardUnit = 1;
 
