@@ -365,9 +365,9 @@ function runHole() {
   world.step(1 / 60);
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
-  let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
+  let dy = hole.hole.y + 0.5 - ball.c_position.c.y;
   let dist = Math.sqrt(dx * dx + dy * dy);
-  if(dist < 0.1) {
+  if(dist < 0.17) {
     nextLevel();
   }
   if(contactLag-- < 0 && ball.m_contactList && ball.m_contactList.contact.v_points.length > 0) {
@@ -605,6 +605,14 @@ function debugBodies(x, y, m) {
       ctx.setTransform();
     }
   }
+  ctx.strokeStyle = '#0f0';
+
+  ctx.beginPath();
+  ctx.arc(
+    (hole.hole.x+0.5) * m + x,
+    (hole.hole.y+0.5) * m + y,
+    0.17 * m, 0, 2 * Math.PI);
+  ctx.stroke();
 }
 
 function drawHole(x, y, w, h) {
@@ -632,16 +640,34 @@ function drawHole(x, y, w, h) {
       ];
 
       let mx = Math.max(Math.max(...bits), 1);
-      if(ON === 0) {
-        bits = bits.map(a => a !== 0 ? 1 : 0);
-        bits.unshift(j % 2);
-        drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
-        continue;
-      } else if(mx > 1) {
-        bits = bits.map(a => a !== mx ? 1 : 0);
-      }
+      let resolved = false;
 
-      bits.unshift(j % 2);
+      switch(bits+','+i%2){
+        case '3,2,3,2,1':
+        case '1,2,3,2,1':
+        case '3,2,1,2,1':
+          bits = [1,0,1,0];
+          mx=2;
+          resolved = true;
+        break;
+        case '2,3,3,2,1':
+          bits = [0,1,1,0];
+          mx=2;
+          resolved = true;
+        break;
+      }
+      if(!resolved){
+        if(ON === 0) {
+          bits = bits.map(a => a !== 0 ? 1 : 0);
+          bits.unshift(j % 2);
+          drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
+          continue;
+        } else if(mx > 1) {
+          bits = bits.map(a => a !== mx ? 1 : 0);
+        }
+
+        bits.unshift(j % 2);
+      }
 
       if(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64]) {
         drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64], x, y, w / 2, h / 2, i, j);
@@ -655,6 +681,10 @@ function drawHole(x, y, w, h) {
           ctx.font=(0.25*(w/W)>>0)+'px monospace';
           ctx.fillText(V%64,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
         }/**/
+        //ctx.fillStyle='#fff';
+        //ctx.textAlign='center';
+        //ctx.font=(0.25*(w/W)>>0)+'px monospace';
+        //ctx.fillText(resolved?1:0,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
       }
     }
   }
@@ -666,8 +696,8 @@ function drawHole(x, y, w, h) {
   ctx.fillText(shown.map((a,b)=>a||!fairwayAssets[b]||fairwayAssets[b].img===grass?'':b+',').join(''),20,y+h+w/W/2);/**/
 
   ctx.drawImage(flag,
-    x + w / W * (hole.hole.x - 0.5) >> 0,
-    y + h / H * (hole.hole.y - 1) >> 0,
+    x + w / W * (hole.hole.x - 0.58) >> 0,
+    y + h / H * (hole.hole.y - 0.98) >> 0,
     (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * (hole.hole.x - 1) >> 0),
     (y + h / H * (hole.hole.y + 1) >> 0) - (y + h / H * (hole.hole.y - 1) >> 0));
 
@@ -699,6 +729,12 @@ function drawHole(x, y, w, h) {
       }
     }
   }
+
+  ctx.drawImage(flagPole,
+    x + w / W * (hole.hole.x - 0.58) >> 0,
+    y + h / H * (hole.hole.y - 0.98) >> 0,
+    (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * (hole.hole.x - 1) >> 0),
+    (y + h / H * (hole.hole.y + 1) >> 0) - (y + h / H * (hole.hole.y - 1) >> 0));
 
   if(dev) {
     debugBodies(x, y, w / W);

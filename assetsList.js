@@ -205,6 +205,9 @@ pistonBlockShadow.src = 'assets/pistonBoxShadow.png';
 const flag = new Image();
 flag.src = 'assets/flag.png';
 
+const flagPole = new Image();
+flagPole.src = 'assets/flagPole.png';
+
 const fairway = new Image();
 fairway.src = 'assets/fairway.png';
 
