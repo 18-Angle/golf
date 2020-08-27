@@ -140,6 +140,45 @@ let holes = [
       "best": 0
     },
     {
+  tee: { x: 4, y: 6.6 },
+  hole: { x: 4, y: 1 },
+  fairway: [
+    [1, 1, 1, 3, 3, 3, 1, 1, 1],
+    [0, 0, 0, 1, 1, 2, 0, 0, 0],
+    [0, 0, 1, 1, 1, 2, 2, 0, 0],
+    [0, 0, 1, 1, 1, 1, 2, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  ],
+  machines: [{
+    type: "piston",
+    variety: "square",
+    rotation: 0.15,
+    power: 0.9,
+    x: 3.5,
+    y: 6.9
+  },{
+    type: "piston",
+    variety: "square",
+    rotation: 0.77,
+    power: 0.9,
+    x: 7,
+    y: 5
+  },{
+    type: "piston",
+    variety: "right-angle",
+    rotation: 0,
+    power: 0.9,
+    x: 1,
+    y: 4
+  }],
+  par: 3,
+  best: 0
+},
+    {
       tee: { x: 4, y: 3 },
       hole: { x: 9, y: 3 },
       fairway: [

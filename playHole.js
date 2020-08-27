@@ -365,7 +365,7 @@ function runHole() {
   world.step(1 / 60);
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
-  let dy = hole.hole.y + 0.5 - ball.c_position.c.y;
+  let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
   let dist = Math.sqrt(dx * dx + dy * dy);
   if(dist < 0.17) {
     nextLevel();
@@ -610,7 +610,7 @@ function debugBodies(x, y, m) {
   ctx.beginPath();
   ctx.arc(
     (hole.hole.x+0.5) * m + x,
-    (hole.hole.y+0.5) * m + y,
+    (hole.hole.y+0.45) * m + y,
     0.17 * m, 0, 2 * Math.PI);
   ctx.stroke();
 }
@@ -681,10 +681,12 @@ function drawHole(x, y, w, h) {
           ctx.font=(0.25*(w/W)>>0)+'px monospace';
           ctx.fillText(V%64,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
         }/**/
-        //ctx.fillStyle='#fff';
-        //ctx.textAlign='center';
-        //ctx.font=(0.25*(w/W)>>0)+'px monospace';
-        //ctx.fillText(resolved?1:0,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
+        if(dev){
+          ctx.fillStyle='#fff';
+          ctx.textAlign='center';
+          ctx.font=(0.25*(w/W)>>0)+'px monospace';
+          ctx.fillText(resolved?1:0,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
+        }
       }
     }
   }
