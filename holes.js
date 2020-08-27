@@ -15,6 +15,7 @@ let holes = [
           type: "piston",
           variety: "square",
           rotation: 0.25,
+          power: 1,
           x: -0.5,
           y: 2
         },

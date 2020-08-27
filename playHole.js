@@ -3,6 +3,8 @@ const DebugBodiesView = false;
 let onHole = [-1, 0, 0, 0, 0];
 let playingHole = 0;
 
+let ballType = 'ball';
+
 let pl = planck,
   vec2 = pl.Vec2;
 let world = new pl.World({
@@ -34,26 +36,26 @@ function drawPiston(obj, x, y, w, h) {
 
 
   drawStaticObject(x, y, obj.x + 0.52, obj.y + 0.52, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
-  drawStaticObject(x,y, obj.x + 0.54, obj.y + 0.54, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
-  drawStaticObject(x ,y, obj.x + 0.56, obj.y + 0.56, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x, y, obj.x + 0.54, obj.y + 0.54, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
+  drawStaticObject(x, y, obj.x + 0.56, obj.y + 0.56, w / W, pistonBlockShadow, 1, obj.rotation, 0, 0);
   //*
   switch (obj.variety) {
     case 'left-angle':
-      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
-      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
-      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w / W * 0.04, y + w / W * 0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
+      drawObject(x + w / W * 0.06, y + w / W * 0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2, true);
       drawObject(x, y, w / W, obj.body, triPiston, 1, 0, 0, 0.45 - 1, 2, true);
       break;
     case 'right-angle':
-      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
-      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
-      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w / W * 0.04, y + w / W * 0.04, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
+      drawObject(x + w / W * 0.06, y + w / W * 0.06, w / W, obj.body, triPistonShadow, 1, 0, 0, 0.45 - 1, 2);
       drawObject(x, y, w / W, obj.body, triPiston, 1, 0, 0, 0.45 - 1, 2);
       break;
     default:
-      drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
-      drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
-      drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w / W * 0.04, y + w / W * 0.04, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
+      drawObject(x + w / W * 0.06, y + w / W * 0.06, w / W, obj.body, pistonShadow, 1, 0, 0, 0.45);
       drawObject(x, y, w / W, obj.body, piston, 1, 0, 0, 0.45);
   } /**/
   drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlock, 1, obj.rotation, 0, 0);
@@ -61,7 +63,7 @@ function drawPiston(obj, x, y, w, h) {
 
 function activatePiston(piston) {
   if(ball.isActive() && piston.body.c_velocity.v.length() > 0.01) { return; }
-  let pistonStrength = 290;
+  let pistonStrength = 290*(piston.power?piston.power:1);
   piston.body.applyForceToCenter(vec2(
     Math.sin(piston.body.getAngle()) * pistonStrength,
     -Math.cos(piston.body.getAngle()) * pistonStrength), true);
@@ -69,13 +71,13 @@ function activatePiston(piston) {
 
 function drawGate(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
-  drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
-  drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
-  drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w / W * 0.04, y + w / W * 0.04, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
+  drawObject(x + w / W * 0.06, y + w / W * 0.06, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
 
-  drawObject(x + w/W*0.02, y + w/W*0.02, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
-  drawObject(x + w/W*0.04, y + w/W*0.04, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
-  drawObject(x + w/W*0.06, y + w/W*0.06, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w / W * 0.04, y + w / W * 0.04, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
+  drawObject(x + w / W * 0.06, y + w / W * 0.06, w / W, obj.gate2, gateShadow, 1, 0, 0, -0.25);
   drawObject(x, y, w / W, obj.gate1, gate, 1, 0.5, 0, -0.25);
   drawObject(x, y, w / W, obj.gate2, gate, 1, 0, 0, -0.25);
 }
@@ -303,12 +305,12 @@ function runHole() {
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
   let dist = Math.sqrt(dx * dx + dy * dy);
   if(dist < 0.1) {
-      sb = 2;
-      switchSong(menuMusic);
+    sb = 2;
+    switchSong(menuMusic);
   }
   if(contactLag-- < 0 && ball.m_contactList && ball.m_contactList.contact.v_points.length > 0) {
     contactLag = 20;
-    if(ball.c_velocity.v.length() > 0.15){
+    if(ball.c_velocity.v.length() > 0.15) {
       hitSound.play();
     }
   }
@@ -588,8 +590,13 @@ function drawHole(x, y, w, h) {
       m.draw(m, x, y, w, h);
     }
   }
-  //drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
-  drawObject(x, y, w/W, ball, jeff, 0.25,0,0.01);
+  switch (ballType) {
+    case 'jeff':
+      drawObject(x, y, w / W, ball, jeff, 0.25, 0, 0.01);
+      break;
+    default:
+      drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBall);
+  }
   if(dev) {
     debugBodies(x, y, w / W);
   }
@@ -615,7 +622,7 @@ function s3(tx, ty) {
     sb = 2;
     switchSong(menuMusic);
   }, back, backb);
-  button(w-s, 0, s, 0.4 * s, () => {
+  button(w - s, 0, s, 0.4 * s, () => {
     setupHole(playingHole, false);
   }, back, backb);
   button(w / 2 - s / 2, h - 0.4 * s, s, 0.4 * s, activateStuff, play, playb);
