@@ -5,6 +5,11 @@ let playingHole = 0;
 
 let ballType = 'ball';
 
+function win(){
+  ballType = 'jeff';
+  console.log("You're a winner!");
+}
+
 let pl = planck,
   vec2 = pl.Vec2;
 let world = new pl.World({
@@ -382,75 +387,69 @@ function runHole() {
 }
 
 let fairwayAssets = [
-  0, { img: forest0 }, { img: forest1R }, { img: forest2 },
-  { img: forest3R }, { img: grass }, { img: forest5R }, { img: grass }, { img: cornerShadow },
+  { img: water }, { img: forest0 }, { img: forest1R }, { img: forest2 },
+  { img: forest3R }, 0, { img: forest5R }, 0, { img: cornerShadow },
   { img: forest0Shadow }, { img: forest6R }, { img: forest7 }, { img: forest8 },
-  { img: grass }, { img: forest9R }, { img: grass },
-  0,
+  0, { img: forest9R }, 0, { img: water },
 
-  0, 0, 0, { img: forest10R },
-  { img: grass }, { img: forest10R }, { img: grass }, { img: forest11R },
+  { img: water }, { img: water }, { img: water }, { img: forest10R },
+  0, { img: forest10R }, 0, { img: forest11R },
   { img: forest11R }, { img: forest6R }, { img: forest12R },
-  { img: grass }, { img: grass }, { img: grass }, { img: grass },
+  0, 0, 0, 0,
 
-  0, { f: 1, img: forest0 }, { img: forest1L }, { f: 1, img: forest2 },
-  { img: forest3L }, { img: grass }, { img: forest5L }, { img: grass },
-  0,
-  { f: 1, img: forest0 }, { img: forest6L }, { f: 1, img: forest7 }, { f: 1, img: forest8 },
-  { img: grass }, { img: forest9L }, { img: grass },
-  0,
+  { img: water }, { f: 1, img: forest0 }, { img: forest1L }, { f: 1, img: forest2 },
+  { img: forest3L }, 0, { img: forest5L }, 0,
+  { img: water }, { f: 1, img: forest0 }, { img: forest6L }, { f: 1, img: forest7 },
+  { f: 1, img: forest8 }, 0, { img: forest9L }, 0,
 
-  0, 0, 0, { img: forest10L },
-  { img: grass }, { img: forest10L }, { img: grass }, { img: forest11L },
-  { img: forest11L }, { img: forest6L }, { img: forest12L },
-  { img: grass }, { img: grass }, { img: grass }, { img: grass },
+  { img: water }, { img: water }, { img: water }, { img: water },
+  { img: forest10L }, 0, { img: forest10L }, 0,
+  { img: forest11L }, { img: forest11L }, { img: forest6L }, { img: forest12L },
+  0, 0, 0, 0,
 
 
-  0, { img: sand0 }, { img: sand1R }, { img: sand2 },
-  { img: sand3R }, { img: grass }, { img: sand5R }, { img: grass }, { img: sandCornerShadow },
-  { img: sand0Shadow }, { img: sand6R }, { img: sand7 }, { img: sand8 },
-  { img: grass }, { img: sand9R }, { img: grass },
-  0,
+  { img: sand }, { img: sand0 }, { img: sand1R }, { img: sand2 },
+  { img: sand3R }, 0, { img: sand5R }, 0,
+  { img: sandCornerShadow }, { img: sand0Shadow }, { img: sand6R }, { img: sand7 },
+  { img: sand8 }, 0, { img: sand9R }, 0,
 
-  0, 0, 0, { img: sand10R },
-  { img: grass }, { img: sand10R }, { img: grass }, { img: sand11R },
-  { img: sand11R }, { img: sand6R }, { img: sand12R },
-  { img: grass }, { img: grass }, { img: grass }, { img: grass },
+  { img: sand }, { img: sand }, { img: sand }, { img: sand },
+  { img: sand10R }, 0, { img: sand10R }, 0,
+  { img: sand11R }, { img: sand11R }, { img: sand6R }, { img: sand12R },
+  0, 0, 0, 0,
 
-  0, { f: 1, img: sand0 }, { img: sand1L }, { f: 1, img: sand2 },
-  { img: sand3L }, { img: grass }, { img: sand5L }, { img: grass },
-  0,
-  { f: 1, img: sand0 }, { img: sand6L }, { f: 1, img: sand7 }, { f: 1, img: sand8 },
-  { img: grass }, { img: sand9L }, { img: grass },
-  0,
+  { img: sand }, { f: 1, img: sand0 }, { img: sand1L }, { f: 1, img: sand2 },
+  { img: sand3L }, 0, { img: sand5L }, 0,
+  { img: sand }, { f: 1, img: sand0 }, { img: sand6L }, { f: 1, img: sand7 },
+  { f: 1, img: sand8 }, 0, { img: sand9L }, 0,
 
-  0, 0, 0, { img: sand10L },
-  { img: grass }, { img: sand10L }, { img: grass }, { img: sand11L },
-  { img: sand11L }, { img: sand6L }, { img: sand12L },
-  { img: grass }, { img: grass }, { img: grass }, { img: grass },
+  { img: sand }, { img: sand }, { img: sand }, { img: sand },
+  { img: sand10L }, 0, { img: sand10L }, 0,
+  { img: sand11L }, { img: sand11L }, { img: sand6L }, { img: sand12L },
+  0, 0, 0, 0,
 
 
 
-  { img: grass }, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
   { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
   { img: wall0 }, { img: shadowF }, { img: wall0 }, { f: 1, img: shadowB },
-  { img: wall0 }, { img: shadowT }, { img: wall0 }, { img: trees },
+  { img: wall0 }, { img: shadowT }, { img: wall0 }, 0,
 
-  { img: trees }, { img: wall1 }, { img: wall0 }, { img: wall1 },
+  0, { img: wall1 }, { img: wall0 }, { img: wall1 },
   { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
   { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
-  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+  { img: wall0 }, 0, { img: wall0 }, 0,
 
 
-  { img: trees }, { img: shadowF }, { img: wall0 }, { img: shadowF },
-  { img: wall0 }, { img: grass }, { img: wall0 }, { img: grass },
+  0, { img: shadowF }, { img: wall0 }, { img: shadowF },
+  { img: wall0 }, 0, { img: wall0 }, 0,
   { img: wall0 }, { img: shadowF }, { img: wall0 }, { img: shadowF },
-  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+  { img: wall0 }, 0, { img: wall0 }, 0,
 
   { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
-  { img: wall0 }, { img: grass }, { img: wall0 }, { img: grass },
+  { img: wall0 }, 0, { img: wall0 }, 0,
   { img: wall0 }, { img: wall1 }, { img: wall0 }, { img: wall1 },
-  { img: wall0 }, { img: grass }, { img: wall0 }, { img: trees },
+  { img: wall0 }, 0, { img: wall0 }, 0,
 
 ];
 
@@ -618,6 +617,8 @@ function debugBodies(x, y, m) {
   ctx.stroke();
 }
 
+//let bottoms = [water,grass,sand,wall1];
+
 function drawHole(x, y, w, h) {
   let W = hole.fairway[0].length,
     H = hole.fairway.length;
@@ -627,13 +628,6 @@ function drawHole(x, y, w, h) {
   for(let i = W * 2 - 1; i >= 0; i--) {
     for(let j = H * 2 - 1; j >= 0; j--) {
       let ON = getFairway(i / 2 >> 0, j / 2 >> 0);
-      switch (ON) {
-        case 2:
-          drawTile({ img: sand }, x, y, w / 2, h / 2, i, j);
-          break;
-        default:
-          drawTile({ img: water }, x, y, w / 2, h / 2, i, j);
-      }
 
       let bits = [
         getFairway((i / 2 >> 0) + (i % 2 ? 1 : -1), (j - 1) / 2 >> 0),
@@ -645,66 +639,25 @@ function drawHole(x, y, w, h) {
       let mx = Math.max(Math.max(...bits), 1);
       let resolved = false;
 
-      switch (bits + '') {
-        case '3,2,3,2':
-        case '1,2,3,2':
-        case '3,2,1,2':
-          bits = [1, 0, 1, 0];
-          mx = 2;
-          resolved = true;
-          break;
-        case '3,3,3,2':
-        case '3,3,1,2':
-        case '3,1,3,2':
-        case '3,1,1,2':
-        case '1,3,3,2':
-        case '1,3,1,2':
-        case '1,1,3,2':
-          bits = [1, 1, 1, 0];
-          mx = 2;
-          resolved = true;
-          break;
-        case '3,2,3,3':
-        case '3,2,3,1':
-        case '3,2,1,3':
-        case '3,2,1,1':
-        case '1,2,3,3':
-        case '1,2,3,1':
-        case '1,2,1,3':
-          bits = [1, 0, 1, 1];
-          mx = 2;
-          resolved = true;
-          break;
-      }
       if(!resolved) {
-        if(ON === 0) {
-          bits = bits.map(a => a !== 0 ? 1 : 0);
-          bits.unshift(j % 2);
-          drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
-          continue;
-        } else if(mx > 1) {
-          bits = bits.map(a => a !== mx ? 1 : 0);
+        //drawTile({img:trees}, x, y, w / 2, h / 2, i, j);
+        if((bits+'').indexOf('0')>=0){
+          Bits = bits.map(a => a !== 0 ? 1 : 0);
+          Bits.unshift(j % 2);
+          drawTile(fairwayAssets[parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
         }
-      }
-      bits.unshift(j % 2);
-
-      if(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64]) {
-        drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64], x, y, w / 2, h / 2, i, j);
-
-        /*
-        let V=parseInt(bits.join(''), 2)+(i%2?32:0)+(mx-1)*64;
-        if(!shown[V]){
-          shown[V]=true;
-          ctx.fillStyle='#fff';
-          ctx.textAlign='center';
-          ctx.font=(0.25*(w/W)>>0)+'px monospace';
-          ctx.fillText(V%64,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
-        }/**/
-        if(dev) {
-          ctx.fillStyle = '#fff';
-          ctx.textAlign = 'center';
-          ctx.font = (0.25 * (w / W) >> 0) + 'px monospace';
-          ctx.fillText(resolved ? 1 : 0, x + w / W / 2 * (i + 0.5), y + h / H / 2 * (j + 0.6));
+        if(ON === 0) {
+          Bits = bits.map(a => a !== 0 ? 1 : 0);
+          Bits.unshift(j % 2);
+          drawTile(fairwayAssets[parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
+        }
+        for(let m=2;m<4;m++){
+          let Bits = bits.map(a => a !== m ? 1 : 0);
+          Bits.unshift(j % 2);
+          let AS = parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0) + (m - 1) * 64;
+          if(fairwayAssets[AS]){
+            drawTile(fairwayAssets[AS], x, y, w / 2, h / 2, i, j);
+          }
         }
       }
     }
@@ -722,6 +675,11 @@ function drawHole(x, y, w, h) {
     (x + w / W * (hole.hole.x + 1) >> 0) - (x + w / W * (hole.hole.x - 1) >> 0),
     (y + h / H * (hole.hole.y + 1) >> 0) - (y + h / H * (hole.hole.y - 1) >> 0));
 
+      for(let m of allMachines) {
+        if(m.type != 'trapDoor') {
+          m.draw(m, x, y, w, h);
+        }
+      }
   for(let m of allMachines) {
     if(m.type == 'trapDoor') {
       m.draw(m, x, y, w, h);
@@ -730,11 +688,6 @@ function drawHole(x, y, w, h) {
 
   drawStaticObject(x, y, ball.c_position.c.x, ball.c_position.c.y, w / W, golfBallShadow);
 
-  for(let m of allMachines) {
-    if(m.type != 'trapDoor') {
-      m.draw(m, x, y, w, h);
-    }
-  }
   switch (ballType) {
     case 'jeff':
       drawObject(x, y, w / W, ball, jeff, 0.25, 0, 0.01);
