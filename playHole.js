@@ -103,7 +103,6 @@ function activateGate(gate) {
 
 function drawTrapDoor(door, x, y, w, h) {
   if(door.active) {
-    door.active = door.active ? door.active - 1 : 0;
     if(door.active && ball.c_position.c.x >> 0 === door.x && ball.c_position.c.y >> 0 === door.y) {
       setupHole(playingHole, false);
     }
@@ -112,7 +111,7 @@ function drawTrapDoor(door, x, y, w, h) {
 }
 
 function activateTrapDoor(door) {
-  door.active = door.active === 0 ? 60 : door.active;
+  door.active = !door.active;
 }
 
 
@@ -642,16 +641,33 @@ function drawHole(x, y, w, h) {
       let mx = Math.max(Math.max(...bits), 1);
       let resolved = false;
 
-      switch(bits+','+i%2){
-        case '3,2,3,2,1':
-        case '1,2,3,2,1':
-        case '3,2,1,2,1':
+      switch(bits+''){
+        case '3,2,3,2':
+        case '1,2,3,2':
+        case '3,2,1,2':
           bits = [1,0,1,0];
           mx=2;
           resolved = true;
         break;
-        case '2,3,3,2,1':
-          bits = [0,1,1,0];
+        case '3,3,3,2':
+        case '3,3,1,2':
+        case '3,1,3,2':
+        case '3,1,1,2':
+        case '1,3,3,2':
+        case '1,3,1,2':
+        case '1,1,3,2':
+          bits = [1,1,1,0];
+          mx=2;
+          resolved = true;
+        break;
+        case '3,2,3,3':
+        case '3,2,3,1':
+        case '3,2,1,3':
+        case '3,2,1,1':
+        case '1,2,3,3':
+        case '1,2,3,1':
+        case '1,2,1,3':
+          bits = [1,0,1,1];
           mx=2;
           resolved = true;
         break;
@@ -665,9 +681,8 @@ function drawHole(x, y, w, h) {
         } else if(mx > 1) {
           bits = bits.map(a => a !== mx ? 1 : 0);
         }
-
-        bits.unshift(j % 2);
       }
+      bits.unshift(j % 2);
 
       if(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64]) {
         drawTile(fairwayAssets[parseInt(bits.join(''), 2) + (i % 2 ? 32 : 0) + (mx - 1) * 64], x, y, w / 2, h / 2, i, j);
