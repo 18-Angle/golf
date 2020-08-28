@@ -103,7 +103,11 @@ function activateGate(gate) {
 
 function drawTrapDoor(door, x, y, w, h) {
   if(door.active) {
-    if(door.active && ball.c_position.c.x >> 0 === door.x && ball.c_position.c.y >> 0 === door.y) {
+    if(door.active &&
+      ball.c_position.c.x > door.x &&
+      ball.c_position.c.y > door.y &&
+      ball.c_position.c.x < door.x + 1 &&
+      ball.c_position.c.y < door.y + 1) {
       setupHole(playingHole, false);
     }
   }
@@ -261,9 +265,9 @@ function machine(m) {
       let block = world.createBody(vec2(m.x + 0.5, m.y + 0.5));
       block.setAngle(Math.PI * 2 * m.rotation);
       block.createFixture(pl.Polygon([
-        vec2(-0.5,-0.5),
-        vec2(-0.5,0.5),
-        vec2(0.5,0.5),
+        vec2(-0.5, -0.5),
+        vec2(-0.5, 0.5),
+        vec2(0.5, 0.5),
       ]), 1);
       let obj = {
         body: block,
@@ -608,8 +612,8 @@ function debugBodies(x, y, m) {
 
   ctx.beginPath();
   ctx.arc(
-    (hole.hole.x+0.5) * m + x,
-    (hole.hole.y+0.45) * m + y,
+    (hole.hole.x + 0.5) * m + x,
+    (hole.hole.y + 0.45) * m + y,
     0.17 * m, 0, 2 * Math.PI);
   ctx.stroke();
 }
@@ -641,14 +645,14 @@ function drawHole(x, y, w, h) {
       let mx = Math.max(Math.max(...bits), 1);
       let resolved = false;
 
-      switch(bits+''){
+      switch (bits + '') {
         case '3,2,3,2':
         case '1,2,3,2':
         case '3,2,1,2':
-          bits = [1,0,1,0];
-          mx=2;
+          bits = [1, 0, 1, 0];
+          mx = 2;
           resolved = true;
-        break;
+          break;
         case '3,3,3,2':
         case '3,3,1,2':
         case '3,1,3,2':
@@ -656,10 +660,10 @@ function drawHole(x, y, w, h) {
         case '1,3,3,2':
         case '1,3,1,2':
         case '1,1,3,2':
-          bits = [1,1,1,0];
-          mx=2;
+          bits = [1, 1, 1, 0];
+          mx = 2;
           resolved = true;
-        break;
+          break;
         case '3,2,3,3':
         case '3,2,3,1':
         case '3,2,1,3':
@@ -667,12 +671,12 @@ function drawHole(x, y, w, h) {
         case '1,2,3,3':
         case '1,2,3,1':
         case '1,2,1,3':
-          bits = [1,0,1,1];
-          mx=2;
+          bits = [1, 0, 1, 1];
+          mx = 2;
           resolved = true;
-        break;
+          break;
       }
-      if(!resolved){
+      if(!resolved) {
         if(ON === 0) {
           bits = bits.map(a => a !== 0 ? 1 : 0);
           bits.unshift(j % 2);
@@ -696,11 +700,11 @@ function drawHole(x, y, w, h) {
           ctx.font=(0.25*(w/W)>>0)+'px monospace';
           ctx.fillText(V%64,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
         }/**/
-        if(dev){
-          ctx.fillStyle='#fff';
-          ctx.textAlign='center';
-          ctx.font=(0.25*(w/W)>>0)+'px monospace';
-          ctx.fillText(resolved?1:0,x+w/W/2*(i+0.5),y+h/H/2*(j+0.6));
+        if(dev) {
+          ctx.fillStyle = '#fff';
+          ctx.textAlign = 'center';
+          ctx.font = (0.25 * (w / W) >> 0) + 'px monospace';
+          ctx.fillText(resolved ? 1 : 0, x + w / W / 2 * (i + 0.5), y + h / H / 2 * (j + 0.6));
         }
       }
     }
