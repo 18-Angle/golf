@@ -141,9 +141,6 @@ sandCornerShadow.src = 'assets/sandCornerShadow.png';
 const wall0 = new Image();
 wall0.src = 'assets/wall0.png';
 
-const wall1 = new Image();
-wall1.src = 'assets/wall1.png';
-
 
 const shadowF = new Image();
 shadowF.src = 'assets/shadow.png';
@@ -166,6 +163,10 @@ const jeff = new Image();
 jeff.src = 'assets/jeff.png';
 
 
+const flipper = new Image();
+flipper.src = 'assets/flipper.png';
+
+
 const trapDoor = new Image();
 trapDoor.src = 'assets/trapdoorClosed.png';
 
@@ -180,6 +181,9 @@ gateShadow.src = 'assets/gateShadow.png';
 
 const golfBall = new Image();
 golfBall.src = 'assets/ball.png';
+
+const golfBallShadow2 = new Image();
+golfBallShadow2.src = 'assets/golfballShadow.png';
 
 const golfBallShadow = new Image();
 golfBallShadow.src = 'assets/ballShadow.png';
