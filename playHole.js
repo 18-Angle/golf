@@ -1,5 +1,3 @@
-const DebugBodiesView = false;
-
 let onHole = [-1, 0, 0, 0, 0];
 let playingHole = 0;
 

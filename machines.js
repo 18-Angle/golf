@@ -1,5 +1,6 @@
 function nullFunction() {}
 
+//piston
 function drawPistonShadow(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
@@ -47,7 +48,6 @@ function drawPiston(obj, x, y, w, h) {
   drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, pistonBlock, 1, obj.rotation, 0, 0);
 }
 
-
 function activatePiston(piston) {
   if(ball.isActive() && piston.body.c_velocity.v.length() > 0.01) { return; }
   let pistonStrength = 290 * (piston.power ? piston.power : 1);
@@ -56,7 +56,7 @@ function activatePiston(piston) {
     -Math.cos(piston.body.getAngle()) * pistonStrength), true);
 }
 
-
+//gate
 function drawGateShadow(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
   drawObject(x + w / W * 0.02, y + w / W * 0.02, w / W, obj.gate1, gateShadow, 1, 0.5, 0, -0.25);
@@ -85,7 +85,7 @@ function activateGate(gate) {
   gate.active = !gate.active;
 }
 
-
+//trap door
 function drawTrapDoor(door, x, y, w, h) {
   if(door.active) {
     if(door.active &&
@@ -103,7 +103,7 @@ function activateTrapDoor(door) {
   door.active = !door.active;
 }
 
-
+//wedge
 function drawWedgeShadow(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
@@ -118,6 +118,36 @@ function drawWedge(obj, x, y, w, h) {
   drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, wedge, 1, obj.rotation, 0, 0);
 }
 
+//flipper
+function drawFlipperShadow(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+  drawObject(x+w/W*0.02, y+w/W*0.02, w / W, obj.body, flipperShadow, 1, 0, -0.04,0,1,obj.f);
+  drawObject(x+w/W*0.04, y+w/W*0.04, w / W, obj.body, flipperShadow, 1, 0, -0.04,0,1,obj.f);
+  drawObject(x+w/W*0.06, y+w/W*0.06, w / W, obj.body, flipperShadow, 1, 0, -0.04,0,1,obj.f);
+}
+
+function drawFlipper(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+  drawObject(x, y, w / W, obj.body, flipper, 1, 0, -0.04,0,1,obj.f);
+}
+
+function activateFlipper(obj) {
+  obj.active=!obj.active;
+  obj.joint.setMotorSpeed(obj.active?10:-10);
+}
+
+//wedge
+function drawCircleShadow(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+}
+
+function drawCircle(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+
+  drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, circle);
+}
+
+//initializer
 function machine(m) {
   switch (m.type) {
     case 'trapDoor': {
@@ -269,6 +299,79 @@ function machine(m) {
       };
       for(let v in m) {
         obj[v] = m[v];
+      }
+      return obj;
+    }
+    case 'circle': {
+      let block = world.createBody(vec2(m.x + 0.5, m.y + 0.5));
+      block.createFixture(pl.Circle(0.4), 1);
+      let obj = {
+        body: block,
+        drawShadow: nullFunction,
+        draw: drawCircle,
+        activate: a => {}
+      };
+      for(let v in m) {
+        obj[v] = m[v];
+      }
+      return obj;
+    }
+    case 'flipper': {
+      let ground = world.createBody(vec2(m.x + 0.5, m.y + 0.5));
+      let flipper = world.createDynamicBody({
+        bullet: true,
+        position: vec2(
+          m.x + 0.5 + 0 * Math.cos(Math.PI * 2 * m.rotation),
+          m.y + 0.5 + 0 * Math.sin(Math.PI * 2 * m.rotation)),
+        angle: Math.PI * 2 * (m.rotation)
+      });
+
+      let xM = m.variety === 'right'?1:-1;
+
+      flipper.createFixture(pl.Polygon([
+        vec2(xM*-0.42, -0.09),
+        vec2(xM*-0.47, -0.07),
+        vec2(xM*-0.5, 0),
+        vec2(xM*-0.47, 0.07),
+        vec2(xM*-0.42, 0.09),
+        vec2(xM*0.38, 0.15),
+        vec2(xM*0.45, 0.11),
+        vec2(xM*0.5, 0),
+        vec2(xM*0.45, -0.11),
+        vec2(xM*0.38, -0.15),
+      ]), 10);
+
+      let gateD = {
+        enableMotor: true,
+        maxMotorTorque: 1000,
+        enableLimit: true,
+        motorSpeed: -10*xM*(m.active?-1:1),
+
+        lowerAngle: -0.1 * Math.PI,
+        upperAngle: 0.1 * Math.PI,
+      };
+
+      let joint = pl.RevoluteJoint(gateD, ground, flipper,
+        vec2(
+          m.x + 0.5 + xM*0.35 * Math.cos(Math.PI * 2 * m.rotation),
+          m.y + 0.5 + xM*0.35 * Math.sin(Math.PI * 2 * m.rotation)),
+      );
+
+      world.createJoint(joint);
+      let obj = {
+        active:false,
+        f:xM===1?0:1,
+        body: flipper,
+        joint: joint,
+        drawShadow: drawFlipperShadow,
+        draw: drawFlipper,
+        activate: activateFlipper
+      };
+      for(let v in m) {
+        obj[v] = m[v];
+      }
+      if(m.variety ==='left'){
+        obj.active = !obj.active;
       }
       return obj;
     }

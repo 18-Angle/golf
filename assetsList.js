@@ -166,6 +166,12 @@ jeff.src = 'assets/jeff.png';
 const flipper = new Image();
 flipper.src = 'assets/flipper.png';
 
+const flipperShadow = new Image();
+flipperShadow.src = 'assets/flipperShadow.png';
+
+const circle = new Image();
+circle.src = 'assets/circle.png';
+
 
 const trapDoor = new Image();
 trapDoor.src = 'assets/trapdoorClosed.png';

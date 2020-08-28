@@ -1,3 +1,5 @@
+const DebugBodiesView = false;
+
 // data {img: image, r: rotation, f: flip?}
 function drawTransformedImage(data, x, y, w, h) {
   if(!data) { return; }
@@ -80,6 +82,8 @@ function debugBodies(x, y, m) {
           ctx.stroke();
           break;
         case 'polygon':
+          ctx.translate((-fixture.m_shape.m_centroid.x) * m, (-fixture.m_shape.m_centroid.y) * m);
+
           //tx += fixture.m_shape.m_centroid.x * m;
           //ty += fixture.m_shape.m_centroid.y * m;
 
