@@ -93,6 +93,7 @@ function drawTrapDoor(door, x, y, w, h) {
       ball.c_position.c.y > door.y &&
       ball.c_position.c.x < door.x + 1 &&
       ball.c_position.c.y < door.y + 1) {
+      splashSound.play();
       setupHole(playingHole, false);
     }
   }

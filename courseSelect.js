@@ -83,7 +83,7 @@ function s1(tx, ty) {
       break;
   }
   */
-  callWithinAR(0.2*s,0.4*s,w-0.4*s,h-0.8*s,2.2,courseButtons);
+  callWithinAR(0.2*s,0.4*s,w-0.4*s,h-0.5*s,2.2,courseButtons);
   ctx.font = (0.03 * min >> 0) + 'px sans-serif';
   ctx.textAlign = 'center';
 }
