@@ -75,6 +75,7 @@ function setupHole(L, changeScene = true) {
 let contactLag = 0;
 
 function nextLevel() {
+  winSound.play();
   if(playingHole < holes[playingCourse].length - 1) {
     playingHole++;
     if(playingHole > onHole[playingCourse]) {
@@ -107,6 +108,7 @@ function runHole() {
         default:
           if(ball.c_position.c.x >> 0 === x && ball.c_position.c.y >> 0 === y) {
             setupHole(playingHole, false);
+            splashSound.play();
           }
           break;
       }

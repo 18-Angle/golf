@@ -139,6 +139,7 @@ function activateFlipper(obj) {
 //circle
 function drawCircleShadow(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
+  drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, circleShadow);
 }
 
 function drawCircle(obj, x, y, w, h) {
@@ -320,9 +321,9 @@ function machine(m) {
       block.createFixture(pl.Circle(0.4), 1);
       let obj = {
         body: block,
-        drawShadow: nullFunction,
+        drawShadow: drawCircleShadow,
         draw: drawCircle,
-        activate: a => {}
+        activate: nullFunction
       };
       for(let v in m) {
         obj[v] = m[v];

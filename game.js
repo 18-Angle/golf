@@ -1,5 +1,5 @@
 let dev = false;
-let version = "0.2.7";
+let version = "1.0.0";
 
 const colors = ["white", "grey", "#151515", "white", "blue"];
 

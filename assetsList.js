@@ -268,6 +268,9 @@ flipperShadow.src = 'assets/flipperShadow.png';
 const circle = new Image();
 circle.src = 'assets/circle.png';
 
+const circleShadow = new Image();
+circleShadow.src = 'assets/circleShadow.png';
+
 
 const someBall = new Image();
 someBall.src = 'assets/someBall.png';

@@ -36,6 +36,14 @@ var hitSound = new Howl({
   src: ['assets/hit.mp3']
 });
 
+var splashSound = new Howl({
+  src: ['assets/splash.mp3']
+});
+
+var winSound = new Howl({
+  src: ['assets/ball-in-hole.mp3']
+});
+
 /*
 
 var moosh = new Howl({
@@ -53,18 +61,19 @@ let playMusic = true;
 let playSound = true;
 let transitionLength = 500;
 let playingSong = menuMusic;
+
+forestTheme.on('end',v=>{if(forestTheme.duration(v)>20){return};forestTheme.play('loop');});
+islandTheme.on('end',v=>{if(islandTheme.duration(v)>20){return};islandTheme.play('loop');});
+
 function withIntro(audio){
-  playingSong.fade(playMusic?1:0,0,transitionLength);
-  playingSong.on('fade',v=>{
-    playingSong.stop();
-    let a={a:audio.play('start')};
-    audio.on('end',v=>{a.a=audio.play('loop');},a.a);
-    playingSong = audio;
-    playingSong.volume(playMusic?1:0);
-  })
+  playingSong.stop();
+  audio.play('start');
+  playingSong = audio;
+  playingSong.volume(playMusic?1:0);
 }
+
 function switchSong(audio){
-  playingSong.fade(1,0,transitionLength);
+  playingSong.fade(playMusic?1:0,0,transitionLength);
   playingSong.on('fade',v=>{
     playingSong.stop();
     audio.play();
@@ -78,11 +87,15 @@ function toggleMusic() {
   playingSong.volume(playMusic?1:0);
 }
 
+
 function toggleSound() {
   playSound = !playSound;
-  if(playSound) {
-    Howler.volume(1);
-  } else {
-    Howler.volume(0);
-  }
+  hitSound.volume(playSound?1:0);
+  splashSound.volume(playSound?1:0);
+  winSound.volume(playSound?1:0);
+  //if(playSound) {
+  //  Howler.volume(1);
+  //} else {
+  //  Howler.volume(0);
+  //}
 }

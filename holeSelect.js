@@ -1,5 +1,4 @@
 function holeButton(x, y, width, n) {
-  ctx.drawImage(lock, x >> 0, y >> 0, width >> 0, width >> 0);
   if(onHole[playingCourse] >= n) {
     button(x, y, width, width, () => { setupHole(n) }, level, levelb);
     return;
@@ -8,7 +7,6 @@ function holeButton(x, y, width, n) {
 }
 
 function wideHoleSelect(X, Y, w, h) {
-  //ctx.drawImage(lock, X >> 0, Y >> 0, w >> 0, h >> 0);
   let onHole = 0;
   let HS = 1 / 6.5;
   for(let y = 1 / 6; y < 1; y += 1 / 3) {
