@@ -331,6 +331,10 @@ let holes = [
       "par": 3,
       "best": 0
     },
+    //pyramid scheme
+    {
+      "tee":{"x":4.9,"y":6.3},"hole":{"x":5,"y":1},"fairway":[[0,0,0,0,0,0,0,0,0,0,0],[0,1,1,1,1,1,1,1,1,1,0],[0,1,1,1,1,1,1,1,1,1,0],[0,1,1,1,1,1,1,1,1,1,0],[0,1,1,1,1,1,1,1,1,1,0],[0,3,1,1,1,1,1,1,1,3,0],[0,3,1,1,1,1,1,1,1,3,0],[0,3,1,1,1,1,1,1,1,3,0],[0,0,0,0,0,0,0,0,0,0,0]],"machines":[{"type":"piston","variety":"square","rotation":0,"power":5,"x":2,"y":7},{"type":"piston","variety":"square","rotation":0,"power":4,"x":3,"y":7},{"type":"piston","variety":"square","rotation":0,"power":4,"x":4,"y":7},{"type":"piston","variety":"square","rotation":0,"power":3,"x":5,"y":7},{"type":"piston","variety":"square","rotation":0,"power":4,"x":6,"y":7},{"type":"piston","variety":"square","rotation":0,"power":4,"x":7,"y":7},{"type":"piston","variety":"square","rotation":0,"power":5,"x":8,"y":7},{"type":"wedge","rotation":0.25,"x":4,"y":2},{"type":"wedge","rotation":0.5,"x":6,"y":2},{"type":"wedge","rotation":0.25,"x":3,"y":3},{"type":"wedge","rotation":0.5,"x":7,"y":3},{"type":"wedge","rotation":0.25,"x":2,"y":4},{"type":"wedge","rotation":0.5,"x":8,"y":4},{"type":"gate","rotation":0.75,"active":false,"x":5,"y":1.45},{"type":"circle","x":5,"y":4},{"type":"circle","x":7,"y":5},{"type":"circle","x":3,"y":5}],"par":3,"best":0
+  },
 
     //tight window
     {

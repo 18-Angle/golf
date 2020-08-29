@@ -137,9 +137,9 @@ function activateFlipper(obj) {
 }
 
 //circle
-//function drawCircleShadow(obj, x, y, w, h) {
-//  let W = hole.fairway[0].length;
-//}
+function drawCircleShadow(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+}
 
 function drawCircle(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
@@ -148,13 +148,6 @@ function drawCircle(obj, x, y, w, h) {
 }
 
 //ball
-function drawBallShadow(obj, x, y, w, h) {
-  let W = hole.fairway[0].length;
-  drawStaticObject(x+w/W*0.02, y+w/W*0.02, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
-  drawStaticObject(x+w/W*0.04, y+w/W*0.04, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
-  drawStaticObject(x+w/W*0.06, y+w/W*0.06, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
-}
-
 function drawBall(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
