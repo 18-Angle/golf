@@ -269,6 +269,13 @@ const circle = new Image();
 circle.src = 'assets/circle.png';
 
 
+const someBall = new Image();
+someBall.src = 'assets/someBall.png';
+
+const someBallShadow = new Image();
+someBallShadow.src = 'assets/someBallShadow.png';
+
+
 const trapDoor = new Image();
 trapDoor.src = 'assets/trapdoorClosed.png';
 

@@ -1,4 +1,4 @@
-const DebugBodiesView = false;
+const DebugBodiesView = true;
 
 // data {img: image, r: rotation, f: flip?}
 function drawTransformedImage(data, x, y, w, h) {

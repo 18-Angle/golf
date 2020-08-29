@@ -136,15 +136,29 @@ function activateFlipper(obj) {
   obj.joint.setMotorSpeed(obj.active?10:-10);
 }
 
-//wedge
-function drawCircleShadow(obj, x, y, w, h) {
-  let W = hole.fairway[0].length;
-}
+//circle
+//function drawCircleShadow(obj, x, y, w, h) {
+//  let W = hole.fairway[0].length;
+//}
 
 function drawCircle(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
   drawStaticObject(x, y, obj.x + 0.5, obj.y + 0.5, w / W, circle);
+}
+
+//ball
+function drawBallShadow(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+  drawStaticObject(x+w/W*0.02, y+w/W*0.02, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
+  drawStaticObject(x+w/W*0.04, y+w/W*0.04, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
+  drawStaticObject(x+w/W*0.06, y+w/W*0.06, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
+}
+
+function drawBall(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+
+  drawStaticObject(x, y, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBall);
 }
 
 //initializer
@@ -309,6 +323,29 @@ function machine(m) {
         body: block,
         drawShadow: nullFunction,
         draw: drawCircle,
+        activate: a => {}
+      };
+      for(let v in m) {
+        obj[v] = m[v];
+      }
+      return obj;
+    }
+    case 'ball': {
+      let block = world.createDynamicBody({
+        bullet: true,
+        linearDamping: 0.4,
+        angularDamping: 1.2
+      });
+      block.createFixture(pl.Circle(0.25), {
+        friction: 0.2,
+        density: 0.3,
+        restitution: 0.4
+      });
+      block.setPosition(vec2(m.x + 0.5, m.y + 0.5));
+      let obj = {
+        body: block,
+        drawShadow: nullFunction,
+        draw: drawBall,
         activate: a => {}
       };
       for(let v in m) {
