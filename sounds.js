@@ -42,6 +42,7 @@ var moosh = new Howl({
 
 
 let playMusic = true;
+let playSound = true;
 let transitionLength = 500;
 let playingSong = menuMusic;
 function withIntro(audio){
@@ -67,6 +68,15 @@ function switchSong(audio){
 function toggleMusic() {
   playMusic = !playMusic;
   if(playMusic) {
+    Howler.volume(1);
+  } else {
+    Howler.volume(0);
+  }
+}
+
+function toggleSound() {
+  playSound = !playSound;
+  if(playSound) {
     Howler.volume(1);
   } else {
     Howler.volume(0);

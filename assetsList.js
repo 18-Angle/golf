@@ -1,3 +1,64 @@
+const menuBackgroundTile = new Image();
+menuBackgroundTile.src = 'assets/menuBackgroundTile.png';
+
+const forestBackground = new Image();
+forestBackground.src = 'assets/forestBackground.png';
+
+const forestBackgroundb = new Image();
+forestBackgroundb.src = 'assets/forestBackgroundb.png';
+
+const forestButton = new Image();
+forestButton.src = 'assets/forestButton.png';
+
+const forestButtonb = new Image();
+forestButtonb.src = 'assets/forestButtonb.png';
+
+const forestTitle = new Image();
+forestTitle.src = 'assets/forestTitle.png';
+
+const islandBack = new Image();
+islandBack.src = 'assets/islandBack.png';
+
+const islandBackground = new Image();
+islandBackground.src = 'assets/islandBackground.png';
+
+const islandButton = new Image();
+islandButton.src = 'assets/islandButton.png';
+
+const islandButtonb = new Image();
+islandButtonb.src = 'assets/islandButtonb.png';
+
+const islandTitle = new Image();
+islandTitle.src = 'assets/islandTitle.png';
+
+const level = new Image();
+level.src = 'assets/level.png';
+
+const levelb = new Image();
+levelb.src = 'assets/levelb.png';
+
+const levelBackground = new Image();
+levelBackground.src = 'assets/levelBackground.png';
+
+const menuBackground = new Image();
+menuBackground.src = 'assets/menuBackground.png';
+
+const playCourse = new Image();
+playCourse.src = 'assets/playCourse.png';
+
+const playCourseb = new Image();
+playCourseb.src = 'assets/playCourseb.png';
+
+const star = new Image();
+star.src = 'assets/star.png';
+
+const titleForest = new Image();
+titleForest.src = 'assets/titleForest.png';
+
+const titleIsland = new Image();
+titleIsland.src = 'assets/titleIsland.png';
+
+
 const grass = new Image();
 grass.src = 'assets/forest4.png';
 
@@ -233,11 +294,11 @@ music.src = 'assets/music.png';
 const noMusic = new Image();
 noMusic.src = 'assets/noMusic.png';
 
-const backMini = new Image();
-backMini.src = 'assets/backMini.png';
+const sound = new Image();
+sound.src = 'assets/sound.png';
 
-const backMinib = new Image();
-backMinib.src = 'assets/backMinib.png';
+const noSound = new Image();
+noSound.src = 'assets/noSound.png';
 
 const lock = new Image();
 lock.src = 'assets/lock.png';
@@ -248,11 +309,23 @@ back.src = 'assets/back.png';
 const backb = new Image();
 backb.src = 'assets/backb.png';
 
+const restart = new Image();
+restart.src = 'assets/restart.png';
+
+const restartb = new Image();
+restartb.src = 'assets/restartb.png';
+
 const play = new Image();
 play.src = 'assets/play.png';
 
 const playb = new Image();
 playb.src = 'assets/playb.png';
+
+const action = new Image();
+action.src = 'assets/action.png';
+
+const actionb = new Image();
+actionb.src = 'assets/actionb.png';
 
 const fullscreen = new Image();
 fullscreen.src = 'assets/fullscreen.png';

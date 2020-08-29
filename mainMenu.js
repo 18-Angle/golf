@@ -1,5 +1,25 @@
+function drawMenu(x,y,w,h){
+  ctx.drawImage(menuBackground, x,y,w,h);
+  ctx.drawImage(menuBackgroundTile, x+w,y,w,h);
+  ctx.drawImage(menuBackgroundTile, x-w,y,w,h);
+  ctx.drawImage(menuBackgroundTile, x+w*2,y,w,h);
+  ctx.drawImage(menuBackgroundTile, x-w*2,y,w,h);
+}
+function drawTitle(x,y,w,h){
+  ctx.drawImage(title, x,y+w/20,w,h);
+}
+
 function s0(tx, ty) {
-  ctx.drawImage(title, tx >> 0, ty >> 0, min >> 0, min >> 0);
+  ctx.fillStyle = "rgb(90,169,177)";
+  ctx.fillRect(0, 0, w, h/2+min/10);
+  ctx.fillStyle = "rgb(90,178,121)";
+  ctx.fillRect(0, h/2+min/10, w, h/2);
+
+  callWithinAR(w/40,0,w-w/20,h,5/3,drawMenu);
+  callWithinAR(w/40,0,w-w/20,h/3,2680/1047,drawTitle);
+
+  let btnAR = 1549/585;
+
   switch (ARType) {
     case (1):
       button(0.1 * w, 0.55 * h, 0.8 * w, 0.3 * w, () => { sb = 1 }, play, playb);
@@ -28,6 +48,8 @@ function s0(tx, ty) {
   }
 
   button(0.88 * w, 0.02 * w, 0.1 * w, 0.1 * w, () => { toggleMusic() }, playMusic ? music : noMusic, playMusic ? noMusic : music);
+
+  button(0.02 * w, 0.02 * w, 0.1 * w, 0.1 * w, () => { toggleSound() }, playSound ? sound : noSound, playSound ? noSound : sound);
 
   ctx.fillStyle = colors[0];
   ctx.textAlign = 'left';

@@ -39,11 +39,36 @@ function tallCourseButtons(x, y, w, h) {
   courseButton(x, y + 0.75 * h, w, 4);
 }
 
-function s1(tx, ty) {
-  let s = getStandard(w / 2.5, w / 6);
+function cButton(x, y, w, h, callback, img, imgb, bx, bw) {
+  if(mouseX > x+bx &&
+    mouseX < x+bx + bw &&
+    mouseY > y &&
+    mouseY < y + h) {
+    document.body.style.cursor = 'pointer';
+    if(!last && mouseIsPressed) {
+      callback();
+      last = true;
+    }
+    ctx.drawImage(imgb, x >> 0, y >> 0, w >> 0, h >> 0);
+  } else {
+    ctx.drawImage(img, x >> 0, y >> 0, w >> 0, h >> 0);
+  }
+  return;
+}
 
-  button(0, 0, s, 0.4 * s, () => { sb = 0 }, back, backb);
-  courseButton(w - s, 0, s, 0);
+function courseButtons(x,y,w,h){
+  cButton(x, y, w*0.6, h*0.8, () => { setupCourse(1) }, forestButton, forestButtonb,0,w*0.6*0.82);
+  cButton(x+w*0.4, y+h*0.2, w*0.6, h*0.8, () => { setupCourse(2) }, islandButton, islandButtonb,w*0.6*0.18,w*0.6*0.82);
+}
+
+function s1(tx, ty) {
+  callWithinAR(0,0,w,h,5/3,drawForest);
+
+  let s = getStandard(w / 2.5, w / 6)*1.5;
+
+  button(0.0125*s, 0.01*s, s, 0.3 * s, () => { sb = 0 }, back, backb);
+  //courseButton(w - s, 0, s, 0);
+  /*
   switch (ARType) {
     case (1):
     case (2):
@@ -57,7 +82,8 @@ function s1(tx, ty) {
       }
       break;
   }
-
+  */
+  callWithinAR(0.2*s,0.4*s,w-0.4*s,h-0.8*s,2.2,courseButtons);
   ctx.font = (0.03 * min >> 0) + 'px sans-serif';
   ctx.textAlign = 'center';
 }

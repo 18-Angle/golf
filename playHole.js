@@ -139,14 +139,15 @@ function s3(tx, ty) {
   ctx.fillRect(0, 0, w, h);
   let s = standardUnit;
   let ar = holeAR;
-  button(0, 0, s, 0.4 * s, () => {
+  button(s*0.0125, s*0.01, s, 0.3 * s, () => {
     sb = 2;
     switchSong(menuMusic);
   }, back, backb);
-  button(w - s, 0, s, 0.4 * s, () => {
+  button(w - s*0.4125, s*0.01, s*0.3, s*0.3, () => {
     setupHole(playingHole, false);
-  }, back, backb);
-  button(w / 2 - s / 2, h - 0.4 * s, s, 0.4 * s, activateStuff, play, playb);
+  }, restart, restartb);
+  let actionAR=1.5;
+  button(w / 2 - (s/2)*actionAR, h - 0.4 * s, s*actionAR, 0.4 * s, activateStuff, action, actionb);
 
   runHole();
   if(ar * (h - 0.8 * s) < w - s * 2) {

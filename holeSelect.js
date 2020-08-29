@@ -1,7 +1,7 @@
 function holeButton(x, y, width, n) {
   ctx.drawImage(lock, x >> 0, y >> 0, width >> 0, width >> 0);
   if(onHole[playingCourse] >= n) {
-    button(x, y, width, width, () => { setupHole(n) }, play, playb);
+    button(x, y, width, width, () => { setupHole(n) }, level, levelb);
     return;
   }
   ctx.drawImage(lock, x >> 0, y >> 0, width >> 0, width >> 0);
@@ -18,8 +18,30 @@ function wideHoleSelect(X, Y, w, h) {
   }
 }
 
+function drawForest(x,y,W,H){
+  for(let m=0,i=w;i>0;i-=W){
+    m++;
+    ctx.drawImage(forestBackgroundb,w-W*m,0,W,h);
+    ctx.drawImage(forestBackground,w-W*m,0,W,H);
+  }
+}
+
+function drawIsland(x,y,w,h){
+  ctx.drawImage(islandBackground,x,y,w,h);
+}
+
 function s2() {
-  let s = standardUnit;
+  switch(playingCourse){
+    case(2):
+      ctx.fillStyle = 'rgb(90,169,177)';
+      ctx.fillRect(0,0,w,h);
+      callWithinAR(0,0,w,h,5/3,drawIsland);
+    break;
+    default:
+      callWithinAR(0,0,w,h,5/3,drawForest);
+  }
+
+  let s = standardUnit*1.5;
   let onHole = 0,
     HS;
   switch (ARType) {
@@ -44,9 +66,9 @@ function s2() {
       break;
   }
 
-  button(0, 0, s, 0.4 * s, () => { sb = 1 }, back, backb);
-  button(w / 2 - s / 2, h - 0.4 * s, s, 0.4 * s, () => { setupHole(0) }, play, playb);
+  ctx.fillStyle = 'rgb(195,213,103)';
+  ctx.fillRect(0,h-0.4*s,w,0.5*s);
 
-  //button(0, 0, 0.4 * h, 0.16 * h, () => { sb = 1 }, back, backb);
-  //button(0.5 * w - 0.2 * h, 0.84 * h, 0.4 * h, 0.16 * h, () => { setupHole(0) }, play, playb);
+  button(0.0125*s, 0.01*s, s, 0.3 * s, () => { sb = 1 }, back, backb);
+  button(w / 2 - s / 2, h - 0.375 * s, s, 0.35 * s, () => { setupHole(0) }, play, playb);
 }
