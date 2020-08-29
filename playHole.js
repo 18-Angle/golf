@@ -134,8 +134,10 @@ function activateStuff() {
   }
 }
 
+let outsideColor = ["#41a963","#41a963","rgb(91,171,189)","#41a963","#41a963"];
+
 function s3(tx, ty) {
-  ctx.fillStyle = "#41a963";
+  ctx.fillStyle = outsideColor[playingCourse];
   ctx.fillRect(0, 0, w, h);
   let s = standardUnit;
   let ar = holeAR;

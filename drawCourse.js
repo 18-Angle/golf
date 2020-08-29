@@ -52,8 +52,10 @@ function drawObject(x, y, m, obj, image, s = 1, r = 0, xOffset = 0, yOffset = 0,
   ctx.setTransform();
 }
 
+let defaultBorder=[1,1,0,1,1];
+
 function getFairway(x, y) {
-  return hole.fairway[y] ? hole.fairway[y][x] ? hole.fairway[y][x] : hole.fairway[y][x] === 0 ? 0 : 1 : 1;
+  return hole.fairway[y] ? hole.fairway[y][x] ? hole.fairway[y][x] : hole.fairway[y][x] === 0 ? 0 : defaultBorder[playingCourse] : defaultBorder[playingCourse];
 }
 
 function debugBodies(x, y, m) {
@@ -171,6 +173,9 @@ function debugBodies(x, y, m) {
 function drawHole(x, y, w, h) {
   let W = hole.fairway[0].length,
     H = hole.fairway.length;
+
+  ctx.fillStyle = "#41a963";
+  ctx.fillRect(x,y,w,h);
 
   ctx.drawImage(flag,
     x + w / W * (hole.hole.x - 0.58) >> 0,
