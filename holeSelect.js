@@ -70,5 +70,6 @@ function s2() {
   ctx.fillRect(0,h-0.4*s,w,0.5*s);
 
   button(0.0125*s, 0.01*s, s, 0.3 * s, () => { sb = 1 }, back, backb);
-  button(w / 2 - s / 2, h - 0.375 * s, s, 0.35 * s, () => { setupHole(0) }, play, playb);
+  let playCourseAR = 1.5;
+  button(w / 2 - (s / 2)*playCourseAR, h - 0.375 * s, s*playCourseAR, 0.35 * s, () => { setupHole(0) }, playCourse, playCourseb);
 }
