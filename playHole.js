@@ -32,14 +32,14 @@ let ball;
 
 let allMachines = [];
 
-let holeThemes = [forestTheme, forestTheme, forestTheme, forestTheme, forestTheme];
+let holeThemes = [forestTheme, forestTheme, islandTheme, forestTheme, forestTheme];
 
 function setupHole(L, changeScene = true) {
   if(changeScene) {
     sb = 3;
     playingHole = L;
 
-    withIntro(holeThemes[L]);
+    withIntro(holeThemes[playingCourse]);
   }
   allMachines = [];
   world = new pl.World({

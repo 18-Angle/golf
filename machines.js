@@ -148,6 +148,12 @@ function drawCircle(obj, x, y, w, h) {
 }
 
 //ball
+function drawBallShadow(obj, x, y, w, h) {
+  let W = hole.fairway[0].length;
+
+  drawStaticObject(x, y, obj.body.c_position.c.x, obj.body.c_position.c.y, w / W, someBallShadow);
+}
+
 function drawBall(obj, x, y, w, h) {
   let W = hole.fairway[0].length;
 
@@ -337,9 +343,9 @@ function machine(m) {
       block.setPosition(vec2(m.x + 0.5, m.y + 0.5));
       let obj = {
         body: block,
-        drawShadow: nullFunction,
+        drawShadow: drawBallShadow,
         draw: drawBall,
-        activate: a => {}
+        activate: nullFunction
       };
       for(let v in m) {
         obj[v] = m[v];

@@ -5,16 +5,24 @@ var menuMusic = new Howl({
   autoplay: true
 });
 
-var forestTheme2 = new Howl({
-  src: ['assets/forest-theme.mp3'],
-  loop: true
-});
-
 var D=14263.47;
 var DD=71152.4;
 var CD=2000;
 var forestTheme = new Howl({
   src: ['assets/forest-theme.mp3'],
+  sprite: {
+    start:[0,D],
+    loop:[D,DD-D,true]
+
+    //start:[DD-CD,CD],
+    //loop:[D,CD]
+  }
+});
+
+D= 18492.87;
+DD=57262.11;
+var islandTheme = new Howl({
+  src: ['assets/island-theme.mp3'],
   sprite: {
     start:[0,D],
     loop:[D,DD-D,true]
@@ -46,13 +54,13 @@ let playSound = true;
 let transitionLength = 500;
 let playingSong = menuMusic;
 function withIntro(audio){
-  playingSong.fade(1,0,transitionLength);
+  playingSong.fade(playMusic?1:0,0,transitionLength);
   playingSong.on('fade',v=>{
     playingSong.stop();
     let a={a:audio.play('start')};
     audio.on('end',v=>{a.a=audio.play('loop');},a.a);
     playingSong = audio;
-    playingSong.volume(1);
+    playingSong.volume(playMusic?1:0);
   })
 }
 function switchSong(audio){
@@ -61,17 +69,13 @@ function switchSong(audio){
     playingSong.stop();
     audio.play();
     playingSong = audio;
-    playingSong.volume(1);
+    playingSong.volume(playMusic?1:0);
   })
 }
 
 function toggleMusic() {
   playMusic = !playMusic;
-  if(playMusic) {
-    Howler.volume(1);
-  } else {
-    Howler.volume(0);
-  }
+  playingSong.volume(playMusic?1:0);
 }
 
 function toggleSound() {
