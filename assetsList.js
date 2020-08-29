@@ -1,5 +1,43 @@
+const play = new Image();
+play.src = 'assets/play.png';
+
+const title = new Image();
+title.src = 'assets/title.png';
+
+const menuBackground = new Image();
+menuBackground.src = 'assets/menuBackground.png';
+
+const fullscreen = new Image();
+fullscreen.src = 'assets/fullscreen.png';
+
+const music = new Image();
+music.src = 'assets/music.png';
+
+const sound = new Image();
+sound.src = 'assets/sound.png';
+
 const menuBackgroundTile = new Image();
 menuBackgroundTile.src = 'assets/menuBackgroundTile.png';
+
+
+const playb = new Image();
+playb.src = 'assets/playb.png';
+
+const exitFullscreen = new Image();
+exitFullscreen.src = 'assets/exitFullscreen.png';
+
+const noSound = new Image();
+noSound.src = 'assets/noSound.png';
+
+const fullscreenb = new Image();
+fullscreenb.src = 'assets/fullscreenb.png';
+
+const exitFullscreenb = new Image();
+exitFullscreenb.src = 'assets/exitFullscreenb.png';
+
+const noMusic = new Image();
+noMusic.src = 'assets/noMusic.png';
+
 
 const forestBackground = new Image();
 forestBackground.src = 'assets/forestBackground.png';
@@ -39,9 +77,6 @@ levelb.src = 'assets/levelb.png';
 
 const levelBackground = new Image();
 levelBackground.src = 'assets/levelBackground.png';
-
-const menuBackground = new Image();
-menuBackground.src = 'assets/menuBackground.png';
 
 const playCourse = new Image();
 playCourse.src = 'assets/playCourse.png';
@@ -288,18 +323,6 @@ trees.src = 'assets/trees.png';
 const water = new Image();
 water.src = 'assets/water.png';
 
-const music = new Image();
-music.src = 'assets/music.png';
-
-const noMusic = new Image();
-noMusic.src = 'assets/noMusic.png';
-
-const sound = new Image();
-sound.src = 'assets/sound.png';
-
-const noSound = new Image();
-noSound.src = 'assets/noSound.png';
-
 const lock = new Image();
 lock.src = 'assets/lock.png';
 
@@ -315,29 +338,8 @@ restart.src = 'assets/restart.png';
 const restartb = new Image();
 restartb.src = 'assets/restartb.png';
 
-const play = new Image();
-play.src = 'assets/play.png';
-
-const playb = new Image();
-playb.src = 'assets/playb.png';
-
 const action = new Image();
 action.src = 'assets/action.png';
 
 const actionb = new Image();
 actionb.src = 'assets/actionb.png';
-
-const fullscreen = new Image();
-fullscreen.src = 'assets/fullscreen.png';
-
-const fullscreenb = new Image();
-fullscreenb.src = 'assets/fullscreenb.png';
-
-const exitFullscreen = new Image();
-exitFullscreen.src = 'assets/exitFullscreen.png';
-
-const exitFullscreenb = new Image();
-exitFullscreenb.src = 'assets/exitFullscreenb.png';
-
-const title = new Image();
-title.src = 'assets/title.png';
