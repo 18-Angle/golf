@@ -165,7 +165,7 @@ function drawBall(obj, x, y, w, h) {
 //initializer
 function machine(m) {
   switch (m.type) {
-    case 'trapDoor': {
+    case 'trapdoor': {
       let obj = {
         active: 0,
         drawShadow: nullFunction,

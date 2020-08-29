@@ -151,7 +151,7 @@ function s3(tx, ty) {
     setupHole(playingHole, false);
   }, restart, restartb);
   let actionAR=1.5;
-  button(w / 2 - (s/2)*actionAR, h - 0.4 * s, s*actionAR, 0.4 * s, activateStuff, action, actionb);
+  button(w / 2 - (s/2)*actionAR, h - 0.41 * s, s*actionAR, 0.4 * s, activateStuff, action, actionb);
 
   runHole();
   if(ar * (h - 0.8 * s) < w - s * 2) {

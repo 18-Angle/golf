@@ -186,7 +186,7 @@ function drawHole(x, y, w, h) {
   let playerShadow = 'normal';
 
   for(let m of allMachines) {
-    if(m.type == 'trapDoor') {
+    if(m.type == 'trapdoor') {
       m.drawShadow(m, x, y, w, h);
       if(
         ball.c_position.c.x + 0.1 > m.x &&
@@ -222,14 +222,12 @@ function drawHole(x, y, w, h) {
         Bits.unshift(j % 2);
         drawTile(fairwayAssets[parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0)], x, y, w / 2, h / 2, i, j);
       }
-      for(let m = 2; m < 4; m++) {
+      for(let m = 2; m < 3; m++) {
         let Bits = bits.map(a => a !== m ? 1 : 0);
         Bits.unshift(j % 2);
         let AS = parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0) + (m - 1) * 64;
-        if(m !== 3 && fairwayAssets[AS]) {
+        if(fairwayAssets[AS]) {
           drawTile(fairwayAssets[AS], x, y, w / 2, h / 2, i, j);
-        } else if(fairwayAssets[AS] && fairwayAssets[AS].img === shadowF && fairwayAssets[AS].f) {
-          drawTile({ img: wall0 }, x, y, w / 2, h / 2, i, j);
         }
       }
     }
@@ -240,13 +238,36 @@ function drawHole(x, y, w, h) {
   }
 
   for(let m of allMachines) {
-    if(m.type != 'trapDoor') {
+    if(m.type != 'trapdoor') {
       m.drawShadow(m, x, y, w, h);
     }
   }
 
+  for(let i = W * 2 - 1; i >= 0; i--) {
+    for(let j = H * 2 - 1; j >= 0; j--) {
+      let ON = getFairway(i / 2 >> 0, j / 2 >> 0);
+
+      let bits = [
+        getFairway((i / 2 >> 0) + (i % 2 ? 1 : -1), (j - 1) / 2 >> 0),
+        getFairway(i / 2 >> 0, (j - 1) / 2 >> 0),
+        getFairway((i / 2 >> 0) + (i % 2 ? 1 : -1), (j + 1) / 2 >> 0),
+        getFairway(i / 2 >> 0, (j + 1) / 2 >> 0),
+      ];
+
+      let mx = Math.max(Math.max(...bits), 1);
+
+      m=3;
+      let Bits = bits.map(a => a !== m ? 1 : 0);
+      Bits.unshift(j % 2);
+      let AS = parseInt(Bits.join(''), 2) + (i % 2 ? 32 : 0) + (m - 1) * 64;
+      if(fairwayAssets[AS] && fairwayAssets[AS].img === shadowF && fairwayAssets[AS].f) {
+        drawTile({ img: wall0 }, x, y, w / 2, h / 2, i, j);
+      }
+    }
+  }
+
   for(let m of allMachines) {
-    if(m.type == 'trapDoor') {
+    if(m.type == 'trapdoor') {
       m.draw(m, x, y, w, h);
     }
   }
@@ -265,7 +286,7 @@ function drawHole(x, y, w, h) {
   }
 
   for(let m of allMachines) {
-    if(m.type != 'trapDoor') {
+    if(m.type != 'trapdoor') {
       m.draw(m, x, y, w, h);
     }
   }
