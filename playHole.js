@@ -92,6 +92,15 @@ function nextLevel() {
 }
 
 function runHole() {
+  let newT = performance.now();
+  while((newT - lastT) / 1000 >= 1/60) {
+    world.step(1/60);
+    runHoleStuff();
+    lastT += 50/3;
+  }
+}
+
+function runHoleStuff() {
   let W = hole.fairway[0].length,
     H = hole.fairway.length;
   for(let x = W - 1; x >= 0; x--) {
@@ -116,11 +125,6 @@ function runHole() {
           break;
       }
     }
-  }
-  let newT = performance.now();
-  while((newT - lastT) / 1000 >= 1/60) {
-    world.step(1/60);
-    lastT += 50/3;
   }
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
