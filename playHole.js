@@ -118,8 +118,10 @@ function runHole() {
     }
   }
   let newT = performance.now();
-  world.step((newT - lastT) / 1000);
-  lastT = newT;
+  while((newT - lastT) / 1000 >= 1/60) {
+    world.step(1/60);
+    lastT += 50/3;
+  }
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
