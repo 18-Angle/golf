@@ -34,7 +34,10 @@ let allMachines = [];
 
 let holeThemes = [forestTheme, forestTheme, islandTheme, forestTheme, forestTheme];
 
+let lastT = 0;
+
 function setupHole(L, changeScene = true) {
+  lastT = performance.now();
   if(changeScene) {
     sb = 3;
     playingHole = L;
@@ -114,7 +117,9 @@ function runHole() {
       }
     }
   }
-  world.step(1 / 60);
+  let newT = performance.now();
+  world.step((newT - lastT) / 1000);
+  lastT = newT;
 
   let dx = hole.hole.x + 0.5 - ball.c_position.c.x;
   let dy = hole.hole.y + 0.45 - ball.c_position.c.y;
